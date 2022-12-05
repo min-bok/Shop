@@ -26,7 +26,7 @@ const LogoImg = styled.img.attrs({
 `;
 
 // const BtnWrap = styled.div`
-//   justify-items: flex-end;
+//   justify-self: flex-end;
 //   background-color: pink;
 // `;
 
