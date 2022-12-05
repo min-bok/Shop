@@ -13,9 +13,9 @@ const reqSql = {
 };
 
 router.post("/:alias", async (req, res) => {
-  if (!req.session.email) {
-    return res.status(401).send({ err: "로그인이 필요한 서비스입니다." });
-  }
+  // if (!req.session.email) {
+  //   return res.status(401).send({ err: "로그인이 필요한 서비스입니다." });
+  // }
   try {
     res.send(await reqSql.db(req.params.alias));
   } catch (err) {
