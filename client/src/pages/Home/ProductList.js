@@ -12,6 +12,7 @@ const ProductCont = styled.div`
   /* background-color: pink; */
 
   :hover {
+    cursor: pointer;
     background-color: #f2f2f2;
   }
 `;
@@ -68,8 +69,8 @@ export default function ProductList() {
       {product &&
         product.map((data) => {
           return (
-            <Link to={`/product/detail/${data.id}`}>
-              <ProductCont key={data.id}>
+            <Link to={`/product/detail/${data.id}`} key={data.id}>
+              <ProductCont>
                 <ProductImg src={data.path}></ProductImg>
                 <ProductName>{data.product_name}</ProductName>
                 <ProductCategoryWrap>

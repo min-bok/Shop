@@ -12,7 +12,7 @@ export default {
     query: `
       SELECT t1.*, t2.category1, t2.category2, t2.category3, t3.path 
       FROM product t1, category t2, image t3
-      WHERE t1.id = 2 AND t1.id = t3.product_id AND t3.type=3 AND t1.category_id = t2.id
+      WHERE t1.id = ? AND t1.id = t3.product_id AND t3.type=3 AND t1.category_id = t2.id
     `,
   },
   // 상세페이지 - 대표이미지
