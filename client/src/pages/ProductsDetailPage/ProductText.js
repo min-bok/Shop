@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import Counter from "../../components/Counter";
 
@@ -29,6 +30,7 @@ const BtnWrap = styled.div`
 `;
 
 const TakeBtn = styled.button`
+  width: 100%;
   height: 60px;
   border: none;
   border-radius: 5px;
@@ -37,6 +39,19 @@ const TakeBtn = styled.button`
 const CartBtn = styled(TakeBtn)``;
 
 export default function ProductText(props) {
+  const [productIdArr, setProductIdArr] = useState([]);
+  const set = new Set(productIdArr);
+
+  useEffect(() => {
+    setProductIdArr([props.data.id, ...productIdArr]);
+  }, []);
+
+  const resultArr = [...set];
+
+  const saveAtCart = async () => {
+    localStorage.setItem("productId", JSON.stringify(resultArr));
+  };
+
   return (
     <ProductCont key={props.data.id}>
       <ProductName>{props.data.product_name}</ProductName>
@@ -55,7 +70,9 @@ export default function ProductText(props) {
 
       <BtnWrap>
         <TakeBtn>바로 구매</TakeBtn>
-        <CartBtn>장바구니</CartBtn>
+        <Link to={`/cart`}>
+          <CartBtn onClick={saveAtCart}>장바구니</CartBtn>
+        </Link>
       </BtnWrap>
     </ProductCont>
   );

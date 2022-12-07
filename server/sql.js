@@ -35,6 +35,13 @@ export default {
       VALUES (?,?,?)
     `,
   },
+  cartList: {
+    query: `
+      SELECT t1.id, t1.product_name, t1.product_price, t1.delivery_price, t2.path
+      FROM product t1, image t2
+      WHERE t1.id = ? AND t1.id = t2.product_id AND t2.type=1
+    `,
+  },
   sellerList: {
     query: `select * from seller`,
   },

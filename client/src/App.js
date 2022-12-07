@@ -3,8 +3,10 @@ import { Reset } from "styled-reset";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import Home from "./pages/Home/Home";
-import ProductDetail from "./pages/ProductsDetail/ProductDetail";
+import ProductDetail from "./pages/ProductsDetailPage/ProductDetail";
 import NotFound from "./components/NotFound";
+import Login from "./pages/LoginPage/Login";
+import Cart from "./pages/CartPage/Cart";
 
 export default function App() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
               element={<ProductDetail />}
             />
           </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

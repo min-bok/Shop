@@ -60,8 +60,12 @@ function Header() {
       </Link>
       <SearchBar />
       {/* <BtnWrap> */}
-      <CartBtn>장바구니</CartBtn>
-      <LoginBtn>로그인</LoginBtn>
+      <Link to={`/cart`}>
+        <CartBtn>장바구니</CartBtn>
+      </Link>
+      <Link to={`/login`}>
+        <LoginBtn>로그인</LoginBtn>
+      </Link>
       {/* </BtnWrap> */}
     </Wrap>
   );
