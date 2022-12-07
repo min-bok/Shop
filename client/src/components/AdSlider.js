@@ -1,12 +1,40 @@
-import React from "react";
-import styled from "styled-components";
+import React, { Component } from "react";
+import Slider from "react-slick";
+import "../style/slick.css";
+import "../style/slick-theme.css";
 
-const AdWrap = styled.div`
-  width: 100vw;
-  height: 500px;
-  background-color: #f2f2f2;
-`;
-
-export default function AdSlider() {
-  return <AdWrap></AdWrap>;
+export default class SimpleSlider extends Component {
+  render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+    return (
+      <div>
+        <Slider {...settings}>
+          <div>
+            <h3>1</h3>
+          </div>
+          <div>
+            <h3>2</h3>
+          </div>
+          <div>
+            <h3>3</h3>
+          </div>
+          <div>
+            <h3>4</h3>
+          </div>
+          <div>
+            <h3>5</h3>
+          </div>
+          <div>
+            <h3>6</h3>
+          </div>
+        </Slider>
+      </div>
+    );
+  }
 }

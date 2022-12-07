@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Cart from "../pages/CartPage/Cart";
 
 const CounterWrap = styled.div`
   display: grid;
@@ -40,7 +41,6 @@ const TotalPrice = styled.p``;
 
 export default function Counter(props) {
   const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(props.price);
 
   const removeProduct = async () => {
     for (let i = quantity; i > 1; i--) {
@@ -56,17 +56,30 @@ export default function Counter(props) {
     setQuantity(quantity + 1);
   };
 
+  // console.log(quantity);
+  // localStorage.setItem("test", quantity);
+
   return (
     <>
-      <CounterWrap>
-        <MinusBtn onClick={removeProduct}>-</MinusBtn>
-        <CountNum>{quantity}</CountNum>
-        <PlusBtn onClick={addProduct}>+</PlusBtn>
-      </CounterWrap>
-      <TotalPrice>
-        총 상품 금액 총 수량 {quantity}개 |{" "}
-        {(quantity * props.price).toLocaleString("ko-KR")}원
-      </TotalPrice>
+      {props.cart ? (
+        <CounterWrap>
+          <MinusBtn>-</MinusBtn>
+          <CountNum>3</CountNum>
+          <PlusBtn>+</PlusBtn>
+        </CounterWrap>
+      ) : (
+        <>
+          <CounterWrap>
+            <MinusBtn onClick={removeProduct}>-</MinusBtn>
+            <CountNum>{quantity}</CountNum>
+            <PlusBtn onClick={addProduct}>+</PlusBtn>
+          </CounterWrap>
+          <TotalPrice>
+            총 상품 금액 총 수량 {quantity}개 |{" "}
+            {(quantity * props.price).toLocaleString("ko-KR")}원
+          </TotalPrice>
+        </>
+      )}
     </>
   );
 }
