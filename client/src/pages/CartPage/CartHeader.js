@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Cont = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 40px 0;
 `;
 
 const Wrap = styled.div`
@@ -19,7 +20,7 @@ const Text = styled.p`
   color: ${({ color }) => color};
 `;
 
-export default function CartHeader() {
+export default function CartHeader(props) {
   return (
     <Cont>
       <Wrap>
@@ -27,7 +28,7 @@ export default function CartHeader() {
           Your Cart
         </Text>
         <Text fontSize={"14px"} fontWeight={400} color={"#000"}>
-          3 Itmes
+          {props.itemQuantity} Itmes
         </Text>
       </Wrap>
       <Wrap>

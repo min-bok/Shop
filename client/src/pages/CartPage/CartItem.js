@@ -1,8 +1,13 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import RemoveItemBtn from "./RemoveItemBtn";
+import CartHeader from "./CartHeader";
 
 const Cont = styled.div`
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   height: auto;
   padding: 30px 0;
   border: 0.75px solid #f2f2f2;
@@ -10,13 +15,13 @@ const Cont = styled.div`
   border-right: none;
   align-items: center;
   justify-content: space-between;
-  margin: 40px 0;
 `;
 
-const ProductImg = styled.div`
+const ProductImg = styled.img`
   width: 200px;
   height: 150px;
   background-color: #f2f2f2;
+  object-fit: cover;
 `;
 
 const ProductName = styled.p`
@@ -39,6 +44,7 @@ const Delivery = styled(ProductName)`
 const QuantityWrap = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const QuantityText = styled(Delivery)``;
@@ -52,12 +58,6 @@ const QuantityNum = styled.span`
 
 const TotalPrice = styled(ProductName)``;
 
-const RemoveBtn = styled.p`
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
 const PriceWrap = styled(QuantityWrap)`
   box-sizing: border-box;
   height: 150px;
@@ -67,23 +67,68 @@ const PriceWrap = styled(QuantityWrap)`
   padding: 25px 0;
 `;
 
+const TextWrap = styled(PriceWrap)`
+  padding: 0;
+  height: 100px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
 export default function CartItem() {
+  const url = "/api/product/cartList";
+  const productId = JSON.parse(localStorage.getItem("productId"));
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    const result = await axios.post(url, {
+      params: {
+        productId,
+      },
+    });
+    setProducts(result.data.map((el) => el[0]));
+  };
+
+  // 수량 받아와서 가격 계산하기
+  // 상품 주문하기 버튼 기능 추가하기
+  // 살품이 하나도 존재하지않는 경우 만들기
+
   return (
-    <Cont>
-      <ProductImg />
-      <div>
-        <ProductName>Product Name</ProductName>
-        <Brand>Brand</Brand>
-        <Delivery>택배배송 / 2,500원</Delivery>
-      </div>
-      <QuantityWrap>
-        <QuantityText>수량</QuantityText>
-        <QuantityNum>4</QuantityNum>
-      </QuantityWrap>
-      <PriceWrap>
-        <RemoveBtn>X</RemoveBtn>
-        <TotalPrice>\ 25,000원</TotalPrice>
-      </PriceWrap>
-    </Cont>
+    <>
+      <CartHeader itemQuantity={products && products.length} />
+      {products &&
+        products.map((data) => {
+          return (
+            <Cont key={data[0].id}>
+              <ProductImg src={data[0].path} />
+              <TextWrap>
+                <ProductName>{data[0].product_name}</ProductName>
+                <Brand>
+                  개당 {data[0].product_price.toLocaleString("ko-KR")}원
+                </Brand>
+                <Delivery>
+                  택배배송 / {data[0].delivery_price.toLocaleString("ko-KR")}
+                </Delivery>
+              </TextWrap>
+
+              <QuantityWrap>
+                <QuantityText>수량</QuantityText>
+                <QuantityNum>4</QuantityNum>
+              </QuantityWrap>
+
+              <PriceWrap>
+                <RemoveItemBtn productId={data[0].id} />
+                <TotalPrice>
+                  \ {data[0].product_price.toLocaleString("ko-KR")}원
+                </TotalPrice>
+              </PriceWrap>
+            </Cont>
+          );
+        })}
+    </>
   );
 }
