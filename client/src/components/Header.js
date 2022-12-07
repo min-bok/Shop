@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../assets/Logo-hodu.svg";
+import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
   width: 100vw;
@@ -54,7 +55,9 @@ const LoginBtn = styled(CartBtn)``;
 function Header() {
   return (
     <Wrap>
-      <LogoImg />
+      <Link to={`/`}>
+        <LogoImg />
+      </Link>
       <SearchBar />
       {/* <BtnWrap> */}
       <CartBtn>장바구니</CartBtn>
