@@ -17,6 +17,11 @@ const ProductCont = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration-line: none;
+  color: #000;
+`;
+
 const ProductImg = styled.img`
   height: 380px;
   width: 380px;
@@ -69,7 +74,7 @@ export default function ProductList() {
       {product &&
         product.map((data) => {
           return (
-            <Link to={`/product/detail/${data.id}`} key={data.id}>
+            <StyledLink to={`/product/detail/${data.id}`} key={data.id}>
               <ProductCont>
                 <ProductImg src={data.path}></ProductImg>
                 <ProductName>{data.product_name}</ProductName>
@@ -80,7 +85,7 @@ export default function ProductList() {
                 </ProductCategoryWrap>
                 <ProductPrice>{data.product_price}원</ProductPrice>
               </ProductCont>
-            </Link>
+            </StyledLink>
           );
         })}
     </>
