@@ -16,7 +16,7 @@ const OrderBtn = styled.button`
   right: 0;
   padding: 8px 60px;
   border: none;
-  background-color: #000;
+  background-color: #251d1c;
   color: #fff;
   margin: 40px 0;
 `;

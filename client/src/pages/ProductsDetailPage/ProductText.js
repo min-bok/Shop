@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 import Counter from "../../components/Counter";
 
 const ProductCont = styled.div`
-  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-color: yellow; */
 `;
 
 const ProductName = styled.p`
-  font-size: 18px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #251d1c;
 `;
 
 const ProductPrice = styled(ProductName)`
@@ -18,7 +23,7 @@ const ProductPrice = styled(ProductName)`
 
 const AboutDelivery = styled(ProductName)`
   font-size: 16px;
-  color: #767676;
+  color: #9b9e9f;
 `;
 
 const OutboundDays = styled(AboutDelivery)``;
@@ -34,7 +39,8 @@ const TakeBtn = styled.button`
   height: 60px;
   border: none;
   border-radius: 5px;
-  background-color: aqua;
+  background-color: #251d1c;
+  color: #fff;
 `;
 const CartBtn = styled(TakeBtn)``;
 

@@ -3,7 +3,7 @@
 .slick-next {
   font-size: 0;
   line-height: 0;
-  background-color: #000;
+  background-color: #251d1c;
 
   position: absolute;
   top: 50%;
@@ -50,7 +50,7 @@
   line-height: 1;
 
   opacity: 0.75;
-  color: #000;
+  color: #251d1c;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

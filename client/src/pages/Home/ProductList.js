@@ -9,7 +9,7 @@ const ProductCont = styled.div`
   justify-content: space-between;
   width: 380px;
   height: 490px;
-  /* background-color: pink; */
+  background-color: #fff;
 
   :hover {
     cursor: pointer;
@@ -19,7 +19,7 @@ const ProductCont = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration-line: none;
-  color: #000;
+  color: #251d1c;
 `;
 
 const ProductImg = styled.img`

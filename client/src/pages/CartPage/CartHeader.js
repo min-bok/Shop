@@ -24,18 +24,18 @@ export default function CartHeader(props) {
   return (
     <Cont>
       <Wrap>
-        <Text fontSize={"21px"} fontWeight={700} color={"#000"}>
+        <Text fontSize={"21px"} fontWeight={700} color={"#251D1C"}>
           Your Cart
         </Text>
-        <Text fontSize={"14px"} fontWeight={400} color={"#000"}>
+        <Text fontSize={"14px"} fontWeight={400} color={"#251D1C"}>
           {props.itemQuantity} Itmes
         </Text>
       </Wrap>
       <Wrap>
-        <Text fontSize={"14px"} fontWeight={400} color={"#000"}>
+        <Text fontSize={"14px"} fontWeight={400} color={"#251D1C"}>
           Total
         </Text>
-        <Text fontSize={"21px"} fontWeight={700} color={"#000"}>
+        <Text fontSize={"21px"} fontWeight={700} color={"#251D1C"}>
           \4,494
         </Text>
       </Wrap>

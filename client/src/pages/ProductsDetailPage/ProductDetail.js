@@ -6,18 +6,28 @@ import axios from "axios";
 
 import ProductText from "./ProductText";
 
-const Top = styled.div`
+const ProductDetailCont = styled.div`
   width: 70%;
+  height: 100vh;
+  /* background-color: pink; */
+  margin: 0 auto;
+  padding: 90px 0 0 0;
+`;
+
+const Top = styled.div`
+  height: 60%;
+  display: flex;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 50px;
-  margin: 0 auto;
+  column-gap: 100px;
+  /* background-color: red; */
 `;
 
 const DetailImg = styled.img`
   width: 70%;
   height: 500px;
-  background-color: yellowgreen;
+  margin: 0 auto;
+  background-color: #f2f2f2;
 `;
 
 export default function ProductDetail() {
@@ -51,13 +61,14 @@ export default function ProductDetail() {
       {info &&
         info.map((data) => {
           return (
-            <>
+            <ProductDetailCont>
               <Top>
                 <ProductMainImg />
                 <ProductText data={data} />
               </Top>
-              <DetailImg src={data.path}></DetailImg>
-            </>
+              {/* <DetailImg src={data.path} /> */}
+              {/* <DetailImg></DetailImg> */}
+            </ProductDetailCont>
           );
         })}
     </>

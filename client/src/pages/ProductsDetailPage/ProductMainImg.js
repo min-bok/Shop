@@ -1,40 +1,69 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft } from "react-icons/bs";
+
 import axios from "axios";
 
 const ImgCont = styled.div`
-  width: 600px;
-  height: 600px;
-  background-color: pink;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
   overflow: scroll;
   overflow-y: hidden;
+  background-color: #f2f2f2;
 `;
 
-const ImgScroll = styled(ImgCont)`
-  width: 1800px;
+const StyledBsChevronLeft = styled(BsChevronLeft)`
+  position: absolute;
+  font-size: 24px;
+  z-index: 999;
+  cursor: pointer;
+`;
+
+const StyledBsChevronRight = styled(BsChevronRight)`
+  position: absolute;
+  right: 0;
+  font-size: 24px;
+  z-index: 999;
+  cursor: pointer;
+`;
+
+const ImgScroll = styled.div`
+  display: flex;
+  width: calc(100% * 3);
+  height: 100%;
+  transform: translateX(${(props) => props.num}%);
 `;
 
 const ProductImg = styled.img`
-  height: 600px;
-  width: 600px;
-  opacity: 0.4;
+  display: inline;
+  flex-shrink: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 `;
 
 export default function ProductMainImg() {
   const { productId } = useParams();
   const [mainImg, setMainImg] = useState();
+  const [num, setNum] = useState(0);
 
   useEffect(() => {
     getMainImg();
   }, []);
 
+  const nextImg = async () => {
+    setNum((num - 100) % (100 * mainImg.length));
+  };
+
   const getMainImg = async () => {
     const url = "/api/product/productMainImage";
 
     try {
-      console.log("성공");
-
       const result = await axios.post(url, {
         params: {
           productId,
@@ -42,7 +71,6 @@ export default function ProductMainImg() {
       });
       setMainImg(result.data[0]);
     } catch (err) {
-      console.log("실패");
       console.log(err);
     }
   };
@@ -50,10 +78,13 @@ export default function ProductMainImg() {
   return (
     <>
       <ImgCont>
-        <ImgScroll>
+        <StyledBsChevronLeft onClick={nextImg} />
+        <StyledBsChevronRight onClick={nextImg} />
+
+        <ImgScroll num={num}>
           {mainImg &&
             mainImg.map((img) => {
-              return <ProductImg src={img.path} />;
+              return <ProductImg src={img.path}></ProductImg>;
             })}
         </ImgScroll>
       </ImgCont>
