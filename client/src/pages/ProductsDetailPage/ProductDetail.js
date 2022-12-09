@@ -20,7 +20,6 @@ const Top = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 100px;
-  /* background-color: red; */
 `;
 
 const DetailImg = styled.img`

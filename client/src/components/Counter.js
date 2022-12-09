@@ -39,7 +39,13 @@ const PlusBtn = styled(MinusBtn)``;
 
 const TotalPrice = styled.p``;
 
-export default function Counter(props) {
+export default function Counter({
+  number,
+  diff,
+  onIncrease,
+  onDecrease,
+  onSetDiff,
+}) {
   const [quantity, setQuantity] = useState(1);
 
   const removeProduct = async () => {
@@ -61,7 +67,7 @@ export default function Counter(props) {
 
   return (
     <>
-      {props.cart ? (
+      {/* {props.cart ? (
         <CounterWrap>
           <MinusBtn>-</MinusBtn>
           <CountNum>3</CountNum>
@@ -79,7 +85,12 @@ export default function Counter(props) {
             {(quantity * props.price).toLocaleString("ko-KR")}원
           </TotalPrice>
         </>
-      )}
+      )} */}
+      <CounterWrap>
+        <MinusBtn onClick={onDecrease}>-</MinusBtn>
+        <CountNum>{number}</CountNum>
+        <PlusBtn onClick={onIncrease}>+</PlusBtn>
+      </CounterWrap>
     </>
   );
 }

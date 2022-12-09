@@ -13,7 +13,15 @@ const ImgCont = styled.div`
   height: 100%;
   overflow: scroll;
   overflow-y: hidden;
+  align-items: center;
   background-color: #f2f2f2;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  ::-webkit-scrollbar {
+    display: none; /* Chrome , Safari , Opera */
+  }
 `;
 
 const StyledBsChevronLeft = styled(BsChevronLeft)`
@@ -36,6 +44,7 @@ const ImgScroll = styled.div`
   width: calc(100% * 3);
   height: 100%;
   transform: translateX(${(props) => props.num}%);
+  transition-duration: 0.5s;
 `;
 
 const ProductImg = styled.img`
@@ -56,7 +65,7 @@ export default function ProductMainImg() {
     getMainImg();
   }, []);
 
-  const nextImg = async () => {
+  const ImgHandler = async () => {
     setNum((num - 100) % (100 * mainImg.length));
   };
 
@@ -78,8 +87,8 @@ export default function ProductMainImg() {
   return (
     <>
       <ImgCont>
-        <StyledBsChevronLeft onClick={nextImg} />
-        <StyledBsChevronRight onClick={nextImg} />
+        <StyledBsChevronLeft onClick={ImgHandler} />
+        <StyledBsChevronRight onClick={ImgHandler} />
 
         <ImgScroll num={num}>
           {mainImg &&

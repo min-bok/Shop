@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { BsCart2 } from "react-icons/bs";
 
 const StyledLink = styled(Link)`
   text-decoration-line: none;
@@ -41,11 +42,8 @@ const LoginBtn = styled(LogoImg)`
   font-weight: bold;
 `;
 
-const CartBtn = styled.img`
-  width: 30px;
-  height: 30px;
-  background-color: #f2f2f2;
-  margin: 0 0 0 200px;
+const StyledCartBtn = styled(BsCart2)`
+  font-size: 21px;
 `;
 
 function Header() {
@@ -60,7 +58,7 @@ function Header() {
           <LoginBtn>Login</LoginBtn>
         </StyledLink>
         <StyledLink to={`/cart`}>
-          <CartBtn />
+          <StyledCartBtn />
         </StyledLink>
       </Wrap>
     </HeaderCont>

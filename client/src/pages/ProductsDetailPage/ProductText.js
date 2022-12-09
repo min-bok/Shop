@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import Counter from "../../components/Counter";
+// import Counter from "../../components/Counter";
+import CounterContainer from "../../containers/Counter";
 
 const ProductCont = styled.div`
   display: flex;
@@ -72,7 +73,8 @@ export default function ProductText(props) {
       <OutboundDays>
         {props.data.outbound_days}일 이내 출고 (주말, 공휴일 제외)
       </OutboundDays>
-      <Counter price={props.data.product_price} />
+      {/* <Counter price={props.data.product_price} /> */}
+      <CounterContainer />
 
       <BtnWrap>
         <TakeBtn>바로 구매</TakeBtn>
