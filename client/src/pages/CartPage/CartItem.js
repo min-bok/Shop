@@ -77,7 +77,7 @@ const TextWrap = styled(PriceWrap)`
 `;
 
 export default function CartItem() {
-  const url = "/api/product/cartList2";
+  const url = "/api/product/cartList";
   const productId = JSON.parse(localStorage.getItem("productId"));
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState();
@@ -92,8 +92,6 @@ export default function CartItem() {
         productId,
       },
     });
-
-    // console.log(result.data[0]);
 
     setProducts(result.data[0][0].map((el) => el));
 
@@ -115,7 +113,7 @@ export default function CartItem() {
       {products &&
         products.map((data) => {
           return (
-            <Cont key={Math.random()}>
+            <Cont key={data.id * data.product_quantity}>
               <ProductImg src={data.path} />
               <TextWrap>
                 <ProductName>{data.product_name}</ProductName>
@@ -133,7 +131,7 @@ export default function CartItem() {
               </QuantityWrap>
 
               <PriceWrap>
-                <RemoveItemBtn productId={data.id} />
+                <RemoveItemBtn productId={data.id * data.product_quantity} />
                 <TotalPrice>
                   \{" "}
                   {(data.product_quantity * data.product_price).toLocaleString(

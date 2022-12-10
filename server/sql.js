@@ -35,15 +35,29 @@ export default {
       VALUES (?,?,?)
     `,
   },
-  cartList: {
-    query: `
-      SELECT t1.id, t1.product_name, t1.product_price, t1.delivery_price, t2.path
-      FROM product t1, image t2
-      WHERE t1.id = ? AND t1.id = t2.product_id AND t2.type=1
-    `,
-  },
+  // cartList: {
+  //   query: `
+  //     SELECT t1.id, t1.product_name, t1.product_price, t1.delivery_price, t2.path
+  //     FROM product t1, image t2
+  //     WHERE t1.id = ? AND t1.id = t2.product_id AND t2.type=1
+  //   `,
+  // },
   // 장바구니 페이지 -- 로그인 구현 후 user_id도 ?로 바꿔서 params 받아오긴
-  cartList2: {
+  // cartList3: [
+  //   {
+  //     query: `
+  //     SELECT t1. *, t2.product_quantity, t4.path
+  //     FROM product t1, cart t2, user t3, image t4
+  //     WHERE t1.id = ? AND t1.id = t2.product_id AND t2.user_id = 1 AND t2.user_id = t3.id AND t1.id = t4.product_id AND t4.type=1
+  //   `,
+  //   },
+  //   {
+  //     deleteQuery: `
+  //     DELETE FROM cart WHERE id = 8
+  //   `,
+  //   },
+  // ],
+  cartList: {
     query: `
       SELECT t1. *, t2.product_quantity, t4.path
       FROM product t1, cart t2, user t3, image t4
@@ -51,10 +65,14 @@ export default {
     `,
   },
   addCart: {
+    // product_id = user_id*product_quantity로 넣기
     query: `
       INSERT INTO cart (product_id, user_id, product_quantity)
       VALUES (1,1,8)
     `,
+  },
+  deleteCart: {
+    query: `DELETE FROM cart WHERE id = ?`,
   },
   sellerList: {
     query: `select * from seller`,

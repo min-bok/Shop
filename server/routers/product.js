@@ -12,6 +12,17 @@ const reqSql = {
   },
 };
 
+// 재사용할 수 있는 방법이 없을까
+// query를 배열로 만들어서 사용하거나
+// 메서드 별로 나눈다..?
+const reqSqlDel = {
+  async db(params) {
+    const query = sql["deleteCart"].query;
+    const result = await connection.query(query, params);
+    return result;
+  },
+};
+
 router.post("/:alias", async (req, res) => {
   // if (!req.session.email) {
   //   return res.status(401).send({ err: "로그인이 필요한 서비스입니다." });
@@ -33,6 +44,18 @@ router.post("/:alias", async (req, res) => {
   } catch (err) {
     res.status(500).send({
       err: "존재하지 않는 페이지 입니다.",
+    });
+  }
+});
+
+// 재사용할 수 있도록 수정필요
+router.delete("/cartList", async (req, res) => {
+  let params = req?.body?.productId;
+  try {
+    return res.send(await reqSqlDel.db(params));
+  } catch (err) {
+    res.status(500).send({
+      err: "상품을 삭제할 수 없습니다",
     });
   }
 });
