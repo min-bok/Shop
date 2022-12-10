@@ -42,6 +42,20 @@ export default {
       WHERE t1.id = ? AND t1.id = t2.product_id AND t2.type=1
     `,
   },
+  // 장바구니 페이지 -- 로그인 구현 후 user_id도 ?로 바꿔서 params 받아오긴
+  cartList2: {
+    query: `
+      SELECT t1. *, t2.product_quantity, t4.path
+      FROM product t1, cart t2, user t3, image t4
+      WHERE t1.id = ? AND t1.id = t2.product_id AND t2.user_id = 1 AND t2.user_id = t3.id AND t1.id = t4.product_id AND t4.type=1
+    `,
+  },
+  addCart: {
+    query: `
+      INSERT INTO cart (product_id, user_id, product_quantity)
+      VALUES (1,1,8)
+    `,
+  },
   sellerList: {
     query: `select * from seller`,
   },

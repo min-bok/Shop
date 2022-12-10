@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import RemoveItemBtn from "./RemoveItemBtn";
 import CartHeader from "./CartHeader";
+import { useSelector } from "react-redux";
 
 const Cont = styled.div`
   position: relative;
@@ -76,9 +77,10 @@ const TextWrap = styled(PriceWrap)`
 `;
 
 export default function CartItem() {
-  const url = "/api/product/cartList";
+  const url = "/api/product/cartList2";
   const productId = JSON.parse(localStorage.getItem("productId"));
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState();
 
   useEffect(() => {
     getProducts();
@@ -90,41 +92,54 @@ export default function CartItem() {
         productId,
       },
     });
-    setProducts(result.data.map((el) => el[0]));
+
+    // console.log(result.data[0]);
+
+    setProducts(result.data[0][0].map((el) => el));
+
+    setTotalPrice(
+      result.data[0][0]
+        .map((el) => el.product_quantity * el.product_price)
+        .reduce((acc, cur) => acc + cur)
+        .toLocaleString("ko-KR")
+    );
   };
 
-  // 수량 받아와서 가격 계산하기
   // 상품 주문하기 버튼 기능 추가하기
   // 살품이 하나도 존재하지않는 경우 만들기
   //   상품이미지 누르면 해당 상품으로 이동
 
   return (
     <>
-      <CartHeader itemQuantity={products && products.length} />
+      <CartHeader totalPrice={totalPrice} />
       {products &&
         products.map((data) => {
           return (
-            <Cont key={data[0].id}>
-              <ProductImg src={data[0].path} />
+            <Cont key={Math.random()}>
+              <ProductImg src={data.path} />
               <TextWrap>
-                <ProductName>{data[0].product_name}</ProductName>
+                <ProductName>{data.product_name}</ProductName>
                 <Brand>
-                  개당 {data[0].product_price.toLocaleString("ko-KR")}원
+                  개당 {data.product_price.toLocaleString("ko-KR")}원
                 </Brand>
                 <Delivery>
-                  택배배송 / {data[0].delivery_price.toLocaleString("ko-KR")}
+                  택배배송 / {data.delivery_price.toLocaleString("ko-KR")}
                 </Delivery>
               </TextWrap>
 
               <QuantityWrap>
                 <QuantityText>수량</QuantityText>
-                <QuantityNum>4</QuantityNum>
+                <QuantityNum>{data.product_quantity}</QuantityNum>
               </QuantityWrap>
 
               <PriceWrap>
-                <RemoveItemBtn productId={data[0].id} />
+                <RemoveItemBtn productId={data.id} />
                 <TotalPrice>
-                  \ {data[0].product_price.toLocaleString("ko-KR")}원
+                  \{" "}
+                  {(data.product_quantity * data.product_price).toLocaleString(
+                    "ko-KR"
+                  )}
+                  원
                 </TotalPrice>
               </PriceWrap>
             </Cont>

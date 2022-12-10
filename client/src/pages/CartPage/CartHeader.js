@@ -36,7 +36,7 @@ export default function CartHeader(props) {
           Total
         </Text>
         <Text fontSize={"21px"} fontWeight={700} color={"#251D1C"}>
-          \4,494
+          {props.totalPrice}
         </Text>
       </Wrap>
     </Cont>

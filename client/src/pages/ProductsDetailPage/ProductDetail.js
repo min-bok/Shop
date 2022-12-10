@@ -9,7 +9,6 @@ import ProductText from "./ProductText";
 const ProductDetailCont = styled.div`
   width: 70%;
   height: 100vh;
-  /* background-color: pink; */
   margin: 0 auto;
   padding: 90px 0 0 0;
 `;

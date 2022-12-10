@@ -39,31 +39,27 @@ const PlusBtn = styled(MinusBtn)``;
 
 const TotalPrice = styled.p``;
 
-export default function Counter({
-  number,
-  diff,
-  onIncrease,
-  onDecrease,
-  onSetDiff,
-}) {
-  const [quantity, setQuantity] = useState(1);
+export default function Counter({ quantity, onIncrease, onDecrease }) {
+  // const [quantity, setQuantity] = useState(1);
 
-  const removeProduct = async () => {
-    for (let i = quantity; i > 1; i--) {
-      setQuantity(quantity - 1);
-    }
+  // const removeProduct = async () => {
+  //   for (let i = quantity; i > 1; i--) {
+  //     setQuantity(quantity - 1);
+  //   }
 
-    if (quantity === 1) {
-      alert("주문가능한 최소 수량은 1개 입니다.");
-    }
-  };
+  //   if (quantity === 1) {
+  //     alert("주문가능한 최소 수량은 1개 입니다.");
+  //   }
+  // };
 
-  const addProduct = async () => {
-    setQuantity(quantity + 1);
-  };
+  // const addProduct = async () => {
+  //   setQuantity(quantity + 1);
+  // };
 
   // console.log(quantity);
   // localStorage.setItem("test", quantity);
+
+  console.log(quantity);
 
   return (
     <>
@@ -88,7 +84,7 @@ export default function Counter({
       )} */}
       <CounterWrap>
         <MinusBtn onClick={onDecrease}>-</MinusBtn>
-        <CountNum>{number}</CountNum>
+        <CountNum>{quantity}</CountNum>
         <PlusBtn onClick={onIncrease}>+</PlusBtn>
       </CounterWrap>
     </>
