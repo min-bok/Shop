@@ -43,7 +43,7 @@ export default function ProductDetail() {
       console.log("성공");
 
       const result = await axios.post(url, {
-        params: {
+        data: {
           productId,
         },
       });
@@ -59,7 +59,7 @@ export default function ProductDetail() {
       {info &&
         info.map((data) => {
           return (
-            <ProductDetailCont>
+            <ProductDetailCont key={data.id}>
               <Top>
                 <ProductMainImg />
                 <ProductText data={data} />

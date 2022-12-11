@@ -36,11 +36,12 @@ export default {
     `,
   },
   // 장바구니 페이지 -- 로그인 구현 후 user_id도 ?로 바꿔서 params 받아오긴
+  // params: product_id(배열), user_id(문자열) 
   cartList: {
     query: `
       SELECT t1. *, t2.product_quantity, t4.path
       FROM product t1, cart t2, user t3, image t4
-      WHERE t1.id = ? AND t1.id = t2.product_id AND t2.user_id = 1 AND t2.user_id = t3.id AND t1.id = t4.product_id AND t4.type=1
+      WHERE t1.id = ? AND t1.id = t2.product_id AND t2.user_id = ? AND t2.user_id = t3.id AND t1.id = t4.product_id AND t4.type=1
     `,
   },
   cartListInsert: {

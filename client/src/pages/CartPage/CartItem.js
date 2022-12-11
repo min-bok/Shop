@@ -79,6 +79,7 @@ const TextWrap = styled(PriceWrap)`
 export default function CartItem() {
   const url = "/api/product/cartList";
   const productId = JSON.parse(localStorage.getItem("productId"));
+  const userId = 1;
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState();
 
@@ -88,15 +89,20 @@ export default function CartItem() {
 
   const getProducts = async () => {
     const result = await axios.post(url, {
-      params: {
+      data: {
         productId,
+        userId,
       },
     });
 
-    setProducts(result.data[0][0].map((el) => el));
+    const itemArr = result.data
+      .map((el) => el[0])[0]
+      .concat(result.data.map((el) => el[0])[1]);
+
+    setProducts(itemArr);
 
     setTotalPrice(
-      result.data[0][0]
+      itemArr
         .map((el) => el.product_quantity * el.product_price)
         .reduce((acc, cur) => acc + cur)
         .toLocaleString("ko-KR")

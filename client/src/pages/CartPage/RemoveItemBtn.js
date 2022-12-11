@@ -17,7 +17,6 @@ export default function RemoveItemBtn(props) {
     try {
       const result = await axios.delete(url, {
         data: {
-          // url,
           productId,
         },
       });

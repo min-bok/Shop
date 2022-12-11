@@ -17,39 +17,28 @@ router.post("/:alias", async (req, res) => {
   //   return res.status(401).send({ err: "로그인이 필요한 서비스입니다." });
   // }
   try {
-    let params = req?.body?.params?.productId;
-
+    let params = req?.body?.data ? req?.body?.data : {};
+    const alias = req?.params?.alias;
     let result = [];
 
-    // params가 배열로 넘어오는 경우 ex) 장바구니 구현 등
+    if (alias == "cartList") {
+      let cartParams = [];
 
-    // insert 의 경우 -- parmas에 배열 값이 들어가야함
-    // cartList의 경우 -- params 가 배열로 넘어오지만 문자열로 변환해야함
-    // 두 개를 동시에 만족하려면....?
-    if (Array.isArray(params)) {
-      for (let i = 0; i < params.length; i++) {
-        result.push(await reqSql.db(req.params.alias, params[i]));
+      for (let i = 0; i < params?.productId?.length; i++) {
+        cartParams.push([params?.productId[i], params?.userId]);
+      }
+
+      for (let i = 0; i < cartParams.length; i++) {
+        result.push(await reqSql.db(alias, cartParams[i]));
       }
     } else {
-      return res.send(await reqSql.db(req.params.alias, params));
+      return res.send(await reqSql.db(alias, params.productId));
     }
+
     return res.send(result);
   } catch (err) {
     res.status(500).send({
       err: "존재하지 않는 페이지 입니다.",
-    });
-  }
-});
-
-router.delete("/:alias", async (req, res) => {
-  let params = req?.body?.productId;
-  const alias = req?.params?.alias + "Delete";
-
-  try {
-    return res.send(await reqSql.db(alias, params));
-  } catch (err) {
-    res.status(500).send({
-      err: "상품을 삭제할 수 없습니다",
     });
   }
 });

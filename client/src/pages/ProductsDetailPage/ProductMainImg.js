@@ -73,7 +73,7 @@ export default function ProductMainImg() {
 
     try {
       const result = await axios.post(url, {
-        params: {
+        data: {
           productId,
         },
       });
@@ -92,7 +92,7 @@ export default function ProductMainImg() {
         <ImgScroll num={num}>
           {mainImg &&
             mainImg.map((img) => {
-              return <ProductImg src={img.path}></ProductImg>;
+              return <ProductImg key={img.id} src={img.path}></ProductImg>;
             })}
         </ImgScroll>
       </ImgCont>
