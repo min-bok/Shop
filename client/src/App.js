@@ -1,30 +1,35 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Reset } from "styled-reset";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayout from "./Layouts/MainLayout";
-import Home from "./pages/Home/Home";
-import ProductDetail from "./pages/ProductsDetailPage/ProductDetail";
-import NotFound from "./components/NotFound";
-import Login from "./pages/LoginPage/Login";
-import Cart from "./pages/CartPage/Cart";
+
+const MainLayout = lazy(() => import("./Layouts/MainLayout"));
+const Home = lazy(() => import("./pages/Home/Home"));
+const ProductDetail = lazy(() =>
+  import("./pages/ProductsDetailPage/ProductDetail")
+);
+const Login = lazy(() => import("./pages/LoginPage/Login"));
+const Cart = lazy(() => import("./pages/CartPage/Cart"));
+const NotFound = lazy(() => import("./components/NotFound"));
 
 export default function App() {
   return (
     <>
       <Reset />
       <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/product/detail/:productId"
-              element={<ProductDetail />}
-            />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/product/detail/:productId"
+                element={<ProductDetail />}
+              />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );
