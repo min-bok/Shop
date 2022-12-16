@@ -3,7 +3,7 @@ import { Reset } from "styled-reset";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const MainLayout = lazy(() => import("./Layouts/MainLayout"));
-const Home = lazy(() => import("./pages/Home/Home"));
+const Home = lazy(() => import("./pages/Home"));
 const ProductDetail = lazy(() =>
   import("./pages/ProductsDetailPage/ProductDetail")
 );

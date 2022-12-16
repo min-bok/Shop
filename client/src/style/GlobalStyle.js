@@ -28,6 +28,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
+    font-size: 16px;
+    font-weight: 400;
     color: #595959;
   }
 

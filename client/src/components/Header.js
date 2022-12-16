@@ -112,7 +112,7 @@ export default function Header() {
             height="33px"
           />
         </Link>
-        <ButtonComponent name="회원가입" margin="0 0 0 15px" />
+        <ButtonComponent name="회원가입" color="#fdfdfd" margin="0 0 0 15px" />
       </>
     );
   };
