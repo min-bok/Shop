@@ -4,12 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const MainLayout = lazy(() => import("./Layouts/MainLayout"));
 const Home = lazy(() => import("./pages/Home"));
-const ProductDetail = lazy(() =>
-  import("./pages/ProductsDetailPage/ProductDetail")
-);
+const ProductDetail = lazy(() => import("./pages/ProductsDetailPage"));
 const Login = lazy(() => import("./pages/LoginPage/Login"));
-const Cart = lazy(() => import("./pages/CartPage/Cart"));
-const NotFound = lazy(() => import("./components/NotFound"));
+const Cart = lazy(() => import("./pages/CartPage"));
+const NotFound = lazy(() => import("./pages/Error/NotFound"));
 
 export default function App() {
   return (
@@ -24,9 +22,9 @@ export default function App() {
                 path="/product/detail/:productId"
                 element={<ProductDetail />}
               />
+              <Route path="/cart" element={<Cart />} />
             </Route>
             <Route path="/login" element={<Login />} />
-            <Route path="/cart" element={<Cart />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </Suspense>

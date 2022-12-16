@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Cont = styled.div`
@@ -21,6 +21,22 @@ const Text = styled.p`
 `;
 
 export default function CartHeader(props) {
+  const product = props.products;
+  const [totalPrice, setTotalPrice] = useState();
+
+  useEffect(() => {
+    getTotalPrice();
+  }, [product]);
+
+  const getTotalPrice = async () => {
+    const result = product?.map(
+      (el) => el.product_price * el[[`SUM(t2.product_quantity)`]]
+    );
+    setTotalPrice(
+      result.reduce((acc, cur) => acc + cur, 0).toLocaleString("ko-KR")
+    );
+  };
+
   return (
     <Cont>
       <Wrap>
@@ -28,7 +44,7 @@ export default function CartHeader(props) {
           Your Cart
         </Text>
         <Text fontSize={"14px"} fontWeight={400} color={"#251D1C"}>
-          {props.itemQuantity} Itmes
+          {product.length} Itmes
         </Text>
       </Wrap>
       <Wrap>
@@ -36,7 +52,7 @@ export default function CartHeader(props) {
           Total
         </Text>
         <Text fontSize={"21px"} fontWeight={700} color={"#251D1C"}>
-          {props.totalPrice}
+          {totalPrice}
         </Text>
       </Wrap>
     </Cont>

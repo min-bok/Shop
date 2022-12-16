@@ -78,48 +78,33 @@ const TextWrap = styled(PriceWrap)`
 
 export default function CartItem() {
   const url = "/api/product/cartList";
-  const productId = JSON.parse(localStorage.getItem("productId"));
-  const userId = 1;
+  const userId = 98;
   const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState();
 
   useEffect(() => {
-    getProducts();
+    getCartData();
   }, []);
 
-  const getProducts = async () => {
-    const result = await axios.post(url, {
-      data: {
-        productId,
-        userId,
-      },
-    });
-
-    const itemArr = result.data
-      .map((el) => el[0])[0]
-      .concat(result.data.map((el) => el[0])[1]);
-
-    setProducts(itemArr);
-
-    setTotalPrice(
-      itemArr
-        .map((el) => el.product_quantity * el.product_price)
-        .reduce((acc, cur) => acc + cur)
-        .toLocaleString("ko-KR")
-    );
+  const getCartData = async () => {
+    try {
+      const result = await axios.post(url, {
+        data: {
+          val: userId,
+        },
+      });
+      setProducts(result.data[0]);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  // 상품 주문하기 버튼 기능 추가하기
-  // 살품이 하나도 존재하지않는 경우 만들기
-  //   상품이미지 누르면 해당 상품으로 이동
 
   return (
     <>
-      <CartHeader totalPrice={totalPrice} />
+      <CartHeader products={products} />
       {products &&
         products.map((data) => {
           return (
-            <Cont key={data.id * data.product_quantity}>
+            <Cont key={data.id}>
               <ProductImg src={data.path} />
               <TextWrap>
                 <ProductName>{data.product_name}</ProductName>
@@ -133,16 +118,16 @@ export default function CartItem() {
 
               <QuantityWrap>
                 <QuantityText>수량</QuantityText>
-                <QuantityNum>{data.product_quantity}</QuantityNum>
+                <QuantityNum>{data[`SUM(t2.product_quantity)`]}</QuantityNum>
               </QuantityWrap>
 
               <PriceWrap>
                 <RemoveItemBtn productId={data.id * data.product_quantity} />
                 <TotalPrice>
                   \{" "}
-                  {(data.product_quantity * data.product_price).toLocaleString(
-                    "ko-KR"
-                  )}
+                  {(
+                    data[`SUM(t2.product_quantity)`] * data.product_price
+                  ).toLocaleString("ko-KR")}
                   원
                 </TotalPrice>
               </PriceWrap>

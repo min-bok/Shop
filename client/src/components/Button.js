@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
+  width: ${(props) => props.width || "auto"};
   height: ${(props) => props.height || "auto"};
   padding: ${(props) => props.padding || "7px 15px"};
   margin: ${(props) => props.margin || 0};
@@ -21,7 +22,9 @@ export default function ButtonComponent(props) {
       color={props.color}
       fontSize={props.fontSize}
       border={props.border}
+      width={props.width}
       height={props.height}
+      disabled={props.disabled}
     >
       {props.name}
     </Button>

@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import ProductMainImg from "./ProductMainImg";
 import axios from "axios";
 
-import ProductText from "./ProductText";
+import MainImg from "./components/MainImg";
+import Information from "./components/Information";
+import Detail from "./components/Detail";
 
-const ProductDetailCont = styled.div`
-  width: 70%;
+const Cont = styled.div`
   height: 100vh;
   margin: 0 auto;
-  padding: 90px 0 0 0;
+  padding: 100px 0 0 0;
 `;
 
-const Top = styled.div`
-  height: 60%;
-  display: flex;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 100px;
-`;
-
-const DetailImg = styled.img`
-  width: 70%;
-  height: 500px;
+const Inner = styled.div`
+  width: 62%;
   margin: 0 auto;
-  background-color: #f2f2f2;
+`;
+
+const Wrap = styled.div`
+  height: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  column-gap: 100px;
 `;
 
 export default function ProductDetail() {
@@ -38,13 +35,14 @@ export default function ProductDetail() {
 
   const getProductsInfo = async () => {
     const url = "/api/product/productDetail";
+    // const val = { productId };
 
     try {
       console.log("성공");
 
       const result = await axios.post(url, {
         data: {
-          productId,
+          val: productId,
         },
       });
 
@@ -59,14 +57,15 @@ export default function ProductDetail() {
       {info &&
         info.map((data) => {
           return (
-            <ProductDetailCont key={data.id}>
-              <Top>
-                <ProductMainImg />
-                <ProductText data={data} />
-              </Top>
-              {/* <DetailImg src={data.path} /> */}
-              {/* <DetailImg></DetailImg> */}
-            </ProductDetailCont>
+            <Cont key={data.id}>
+              <Inner>
+                <Wrap>
+                  <MainImg />
+                  <Information data={data} />
+                </Wrap>
+                <Detail />
+              </Inner>
+            </Cont>
           );
         })}
     </>

@@ -17,25 +17,30 @@ router.post("/:alias", async (req, res) => {
   //   return res.status(401).send({ err: "로그인이 필요한 서비스입니다." });
   // }
   try {
-    let params = req?.body?.data ? req?.body?.data : {};
     const alias = req?.params?.alias;
-    let result = [];
+    const params = req?.body.data ? req?.body.data : {};
 
-    if (alias == "cartList") {
-      let cartParams = [];
+    console.log(alias);
+    console.log(params);
+    console.log(params.val);
 
-      for (let i = 0; i < params?.productId?.length; i++) {
-        cartParams.push([params?.productId[i], params?.userId]);
-      }
+    // let result = [];
 
-      for (let i = 0; i < cartParams.length; i++) {
-        result.push(await reqSql.db(alias, cartParams[i]));
-      }
-    } else {
-      return res.send(await reqSql.db(alias, params.productId));
-    }
+    // if (alias == "cartList") {
+    //   let cartParams = [];
 
-    return res.send(result);
+    //   for (let i = 0; i < params?.productId?.length; i++) {
+    //     cartParams.push([params?.productId[i], params?.userId]);
+    //   }
+
+    //   for (let i = 0; i < cartParams.length; i++) {
+    //     result.push(await reqSql.db(alias, cartParams[i]));
+    //   }
+    // } else {
+    //   return res.send(await reqSql.db(alias, params.productId));
+    // }
+
+    return res.send(await reqSql.db(alias, params.val));
   } catch (err) {
     res.status(500).send({
       err: "존재하지 않는 페이지 입니다.",

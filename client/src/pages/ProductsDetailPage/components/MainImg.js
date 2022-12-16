@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 import { BsChevronRight } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
-
-import axios from "axios";
+import ButtonComponent from "../../../components/Button";
 
 const ImgCont = styled.div`
   position: relative;
@@ -55,7 +56,7 @@ const ProductImg = styled.img`
   object-fit: fill;
 `;
 
-export default function ProductMainImg() {
+export default function MainImg() {
   const { productId } = useParams();
   const [mainImg, setMainImg] = useState();
   const [num, setNum] = useState(0);
@@ -74,7 +75,7 @@ export default function ProductMainImg() {
     try {
       const result = await axios.post(url, {
         data: {
-          productId,
+          val: productId,
         },
       });
       setMainImg(result.data[0]);
@@ -84,18 +85,16 @@ export default function ProductMainImg() {
   };
 
   return (
-    <>
-      <ImgCont>
-        <StyledBsChevronLeft onClick={ImgHandler} />
-        <StyledBsChevronRight onClick={ImgHandler} />
+    <ImgCont>
+      <StyledBsChevronLeft onClick={ImgHandler} />
+      <StyledBsChevronRight onClick={ImgHandler} />
 
-        <ImgScroll num={num}>
-          {mainImg &&
-            mainImg.map((img) => {
-              return <ProductImg key={img.id} src={img.path}></ProductImg>;
-            })}
-        </ImgScroll>
-      </ImgCont>
-    </>
+      <ImgScroll num={num}>
+        {mainImg &&
+          mainImg.map((img) => {
+            return <ProductImg key={img.id} src={img.path}></ProductImg>;
+          })}
+      </ImgScroll>
+    </ImgCont>
   );
 }
