@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   *, *::before, *::after {
     font-family: "Pretendard", sans-serif;
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
   }
 
   body {
@@ -23,14 +23,26 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    background-color: #fdfdfd;
+
   }
 
   p {
-    color: #333;
+    color: #595959;
   }
 
   a {
     text-decoration: none;
+  }
+
+  button {
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input {
+    outline: none;
+    border-radius: 5px;
   }
 `;
 
