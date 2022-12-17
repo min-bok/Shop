@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { increase, decrease, reset } from "../reducers/counter";
+import { useCounterCheck } from "../hooks/useCounterCheck";
 import ButtonComponent from "./Button";
 
 const CounterWrap = styled.div`
@@ -21,20 +25,20 @@ const CountNum = styled.p`
   align-items: center;
 `;
 
-export default function Counter({ quantity, diff, onIncrease, onDecrease }) {
-  const [disabled, setDisabled] = useState(false);
+export default function Counter() {
+  let quantity = useSelector((state) => state.counter.quantity);
+
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const onIncrease = () => dispatch(increase());
+  const onDecrease = () => dispatch(decrease());
+  const onReset = () => dispatch(reset());
 
   useEffect(() => {
-    Check();
-  }, [quantity]);
+    onReset();
+  }, [location]);
 
-  const Check = async () => {
-    if (quantity === 1) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  };
+  const disabled = useCounterCheck(quantity);
 
   return (
     <>

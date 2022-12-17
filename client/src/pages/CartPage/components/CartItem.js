@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import RemoveItemBtn from "./RemoveItemBtn";
+import RemoveBtn from "./RemoveBtn";
 import CartHeader from "./CartHeader";
-import { useSelector } from "react-redux";
 
 const Cont = styled.div`
   position: relative;
-  display: grid;
+  display: ${(props) => props.display};
   grid-template-columns: repeat(4, 1fr);
   height: auto;
   padding: 30px 0;
@@ -80,8 +79,11 @@ export default function CartItem() {
   const url = "/api/product/cartList";
   const userId = 98;
   const [products, setProducts] = useState([]);
+  const [removeId, setRemoveId] = useState(0);
+  const [arr, setArr] = useState([]);
 
   useEffect(() => {
+    setArr(products.map((el) => el.id));
     getCartData();
   }, []);
 
@@ -98,13 +100,27 @@ export default function CartItem() {
     }
   };
 
+  // const createIdArr = async () => {
+  //   setArr(products.map((el) => el.id));
+  // };
+
+  // x 누르면 dispaly: none 되게하기
+  const remove = async (e) => {
+    setArr(arr.filter((el) => el != e.target.id));
+    console.log(2232);
+    console.log(arr);
+    console.log(
+      arr.map((el) => el == e.target.id).map((el) => console.log(el))
+    );
+  };
+
   return (
     <>
       <CartHeader products={products} />
       {products &&
         products.map((data) => {
           return (
-            <Cont key={data.id}>
+            <Cont key={data.id} display={true ? "grid" : "none"}>
               <ProductImg src={data.path} />
               <TextWrap>
                 <ProductName>{data.product_name}</ProductName>
@@ -122,7 +138,7 @@ export default function CartItem() {
               </QuantityWrap>
 
               <PriceWrap>
-                <RemoveItemBtn productId={data.id * data.product_quantity} />
+                <RemoveBtn method={remove} productId={data.id} />
                 <TotalPrice>
                   \{" "}
                   {(

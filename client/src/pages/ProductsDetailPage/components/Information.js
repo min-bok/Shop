@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import Counter from "../../../containers/CounterContainer";
+import Counter from "../../../components/Counter";
 import PrintBtn from "./PrintBtn";
 
 const Cont = styled.div`

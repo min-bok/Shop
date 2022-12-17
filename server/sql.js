@@ -36,7 +36,6 @@ export default {
     `,
   },
   // 장바구니 페이지 -- 로그인 구현 후 user_id도 ?로 바꿔서 params 받아오긴
-  // params: product_id(배열), user_id(문자열)
   cartList: {
     query: `
     SELECT t1. *, SUM(t2.product_quantity), t4.path

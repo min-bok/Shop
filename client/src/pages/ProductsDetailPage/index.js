@@ -35,11 +35,8 @@ export default function ProductDetail() {
 
   const getProductsInfo = async () => {
     const url = "/api/product/productDetail";
-    // const val = { productId };
 
     try {
-      console.log("성공");
-
       const result = await axios.post(url, {
         data: {
           val: productId,
@@ -48,7 +45,6 @@ export default function ProductDetail() {
 
       setInfo(result.data[0]);
     } catch (err) {
-      console.log("실패");
       console.log(err);
     }
   };

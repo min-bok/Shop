@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { BiX } from "react-icons/bi";
 
 const RemoveBtn = styled.p`
   font-size: 18px;
@@ -12,7 +13,7 @@ export default function RemoveItemBtn(props) {
   const productId = props.productId;
 
   const removeItemHandle = async () => {
-    const url = "/api/product/cartList";
+    const url = "/api/product/cartListDelete";
 
     try {
       const result = await axios.delete(url, {
@@ -31,5 +32,14 @@ export default function RemoveItemBtn(props) {
     }
   };
 
-  return <RemoveBtn onClick={removeItemHandle}>X</RemoveBtn>;
+  // return <RemoveBtn onClick={removeItemHandle}>X</RemoveBtn>;
+  return (
+    <BiX
+      onClick={props.method}
+      size="24px"
+      padding="20px 20px"
+      cursor="pointer"
+      id={productId}
+    />
+  );
 }

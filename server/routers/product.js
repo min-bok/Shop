@@ -50,7 +50,7 @@ router.post("/:alias", async (req, res) => {
 
 router.delete("/:alias", async (req, res) => {
   let params = req?.body?.productId;
-  const alias = req?.params?.alias + "Delete";
+  const alias = req?.params?.alias;
 
   try {
     return res.send(await reqSql.db(alias, params));
