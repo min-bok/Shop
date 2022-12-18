@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Reset } from "styled-reset";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const MainLayout = lazy(() => import("./Layouts/MainLayout"));
+const ContainHeader = lazy(() => import("./Layouts/ContainHeader"));
 const Home = lazy(() => import("./pages/Home"));
 const ProductDetail = lazy(() => import("./pages/ProductsDetailPage"));
 const Login = lazy(() => import("./pages/LoginPage/Login"));
@@ -16,7 +16,7 @@ export default function App() {
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route element={<MainLayout />}>
+            <Route element={<ContainHeader />}>
               <Route path="/" element={<Home />} />
               <Route
                 path="/product/detail/:productId"

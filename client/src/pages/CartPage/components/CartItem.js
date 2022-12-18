@@ -3,10 +3,11 @@ import styled from "styled-components";
 import axios from "axios";
 import RemoveBtn from "./RemoveBtn";
 import CartHeader from "./CartHeader";
+import OrderBtn from "./OrderBtn";
 
 const Cont = styled.div`
   position: relative;
-  display: ${(props) => props.display};
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   height: auto;
   padding: 30px 0;
@@ -79,11 +80,9 @@ export default function CartItem() {
   const url = "/api/product/cartList";
   const userId = 98;
   const [products, setProducts] = useState([]);
-  const [removeId, setRemoveId] = useState(0);
-  const [arr, setArr] = useState([]);
+  // const [removeId, setRemoveId] = useState();
 
   useEffect(() => {
-    setArr(products.map((el) => el.id));
     getCartData();
   }, []);
 
@@ -100,19 +99,10 @@ export default function CartItem() {
     }
   };
 
-  // const createIdArr = async () => {
-  //   setArr(products.map((el) => el.id));
+  // const remove = (e) => {
+  //   setRemoveId(e.target.id);
+  //   setProducts(products.filter((el) => el.id != e.target.id));
   // };
-
-  // x 누르면 dispaly: none 되게하기
-  const remove = async (e) => {
-    setArr(arr.filter((el) => el != e.target.id));
-    console.log(2232);
-    console.log(arr);
-    console.log(
-      arr.map((el) => el == e.target.id).map((el) => console.log(el))
-    );
-  };
 
   return (
     <>
@@ -120,7 +110,7 @@ export default function CartItem() {
       {products &&
         products.map((data) => {
           return (
-            <Cont key={data.id} display={true ? "grid" : "none"}>
+            <Cont key={data.id}>
               <ProductImg src={data.path} />
               <TextWrap>
                 <ProductName>{data.product_name}</ProductName>
@@ -138,9 +128,9 @@ export default function CartItem() {
               </QuantityWrap>
 
               <PriceWrap>
-                <RemoveBtn method={remove} productId={data.id} />
+                <RemoveBtn productId={data.id} />
                 <TotalPrice>
-                  \{" "}
+                  \
                   {(
                     data[`SUM(t2.product_quantity)`] * data.product_price
                   ).toLocaleString("ko-KR")}
@@ -150,6 +140,7 @@ export default function CartItem() {
             </Cont>
           );
         })}
+      <OrderBtn products={products} />
     </>
   );
 }

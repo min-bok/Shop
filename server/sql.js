@@ -51,7 +51,7 @@ export default {
     `,
   },
   cartListDelete: {
-    query: `DELETE FROM cart WHERE id = 1`,
+    query: `DELETE FROM cart WHERE product_id = ? AND user_id = ?`,
   },
   sellerList: {
     query: `select * from seller`,

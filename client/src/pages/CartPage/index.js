@@ -12,7 +12,6 @@ export default function Cart() {
   return (
     <Inner>
       <CartItem />
-      <OrderBtn />
     </Inner>
   );
 }

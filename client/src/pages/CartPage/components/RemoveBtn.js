@@ -1,41 +1,34 @@
-import React from "react";
-import styled from "styled-components";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { BiX } from "react-icons/bi";
-
-const RemoveBtn = styled.p`
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-`;
+import axios from "axios";
 
 export default function RemoveItemBtn(props) {
   const productId = props.productId;
+  const userId = 98;
+  const [removeId, setRemoveId] = useState(0);
 
-  const removeItemHandle = async () => {
+  const remove = async (e) => {
+    setRemoveId(e.target.id);
     const url = "/api/product/cartListDelete";
-
+    const val = [removeId, userId];
     try {
       const result = await axios.delete(url, {
         data: {
-          productId,
+          val: val,
         },
       });
 
-      // 리로드 없이 화면 재렌더링하는 방법은 없나?
-      // 삭제 버튼 누르면 일단 클라이언트에서만 삭제하고
-      // 상품주문창으로 넘어갈때 db로 보내면 해결되지 않을까
-      window.location.reload();
-      return result;
+      console.log(result);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // return <RemoveBtn onClick={removeItemHandle}>X</RemoveBtn>;
+  console.log(removeId);
+
   return (
     <BiX
-      onClick={props.method}
+      onClick={remove}
       size="24px"
       padding="20px 20px"
       cursor="pointer"

@@ -20,9 +20,9 @@ router.post("/:alias", async (req, res) => {
     const alias = req?.params?.alias;
     const params = req?.body.data ? req?.body.data : {};
 
-    console.log(alias);
-    console.log(params);
-    console.log(params.val);
+    // console.log(alias);
+    // console.log(params);
+    // console.log(params.val);
 
     // let result = [];
 
@@ -49,11 +49,14 @@ router.post("/:alias", async (req, res) => {
 });
 
 router.delete("/:alias", async (req, res) => {
-  let params = req?.body?.productId;
+  let params = req.body;
   const alias = req?.params?.alias;
 
+  console.log(params.val);
+  console.log(alias);
+
   try {
-    return res.send(await reqSql.db(alias, params));
+    return res.send(await reqSql.db(alias, params.val));
   } catch (err) {
     res.status(500).send({
       err: "상품을 삭제할 수 없습니다",
