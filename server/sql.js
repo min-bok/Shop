@@ -56,4 +56,13 @@ export default {
   sellerList: {
     query: `select * from seller`,
   },
+  signup: {
+    query: `
+      INSERT INTO user (email, password)
+      VALUES (?,?)`,
+  },
+  duplicateCheck: {
+    query: `
+    select EXISTS (select * from user WHERE email=?) as success`,
+  },
 };

@@ -52,7 +52,7 @@ const Logo = styled.div`
   color: #6d94cc;
 `;
 
-const InputWrap = styled.div`
+const InputWrap = styled.form`
   display: inline;
   position: relative;
 `;
@@ -94,13 +94,15 @@ export default function Header() {
           outline="1.25px solid #6d94cc"
           margin="0 40px 0 0"
           color="#7F7F7F"
+          border="none"
+          radius="5px"
+          borderBottom="none"
         />
         <StyledBiSearch />
       </InputWrap>
     );
   };
 
-  // 회원가입 Link 연결하기
   const PrintIsntLoginBtn = () => {
     return (
       <>
@@ -112,7 +114,13 @@ export default function Header() {
             height="33px"
           />
         </Link>
-        <ButtonComponent name="회원가입" color="#fdfdfd" margin="0 0 0 15px" />
+        <Link to={"/signup"}>
+          <ButtonComponent
+            name="회원가입"
+            color="#fdfdfd"
+            margin="0 0 0 15px"
+          />
+        </Link>
       </>
     );
   };

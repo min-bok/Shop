@@ -10,13 +10,15 @@ const Input = styled.input`
   color: ${(props) => props.color || "#595959"};
   font-size: ${(props) => props.fontSize || "16px"};
   border: ${(props) => props.border || "none"};
-  border-radius: 5px;
+  border-bottom: ${(props) => props.borderBottom || "1px solid #7F7F7F"};
+  border-radius: ${(props) => props.radius || "0px"};
 
   ::placeholder {
     color: ${(props) => props.color || "#595959"};
   }
 
   :focus {
+    border-bottom: ${(props) => props.focus || "none"};
     outline: ${(props) => props.outline || "none"};
   }
 `;
@@ -36,6 +38,10 @@ export default function InputComponent(props) {
       width={props.width}
       height={props.height}
       outline={props.outline}
+      focus={props.focus}
+      radius={props.radius}
+      borderBottom={props.borderBottom}
+      required
     />
   );
 }

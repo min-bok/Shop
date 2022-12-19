@@ -20,25 +20,7 @@ router.post("/:alias", async (req, res) => {
     const alias = req?.params?.alias;
     const params = req?.body.data ? req?.body.data : {};
 
-    // console.log(alias);
-    // console.log(params);
-    // console.log(params.val);
-
-    // let result = [];
-
-    // if (alias == "cartList") {
-    //   let cartParams = [];
-
-    //   for (let i = 0; i < params?.productId?.length; i++) {
-    //     cartParams.push([params?.productId[i], params?.userId]);
-    //   }
-
-    //   for (let i = 0; i < cartParams.length; i++) {
-    //     result.push(await reqSql.db(alias, cartParams[i]));
-    //   }
-    // } else {
-    //   return res.send(await reqSql.db(alias, params.productId));
-    // }
+    console.log(params);
 
     return res.send(await reqSql.db(alias, params.val));
   } catch (err) {
@@ -52,8 +34,8 @@ router.delete("/:alias", async (req, res) => {
   let params = req.body;
   const alias = req?.params?.alias;
 
-  console.log(params.val);
-  console.log(alias);
+  // console.log(params.val);
+  // console.log(alias);
 
   try {
     return res.send(await reqSql.db(alias, params.val));
