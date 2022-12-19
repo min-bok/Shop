@@ -10,6 +10,10 @@ const Button = styled.button`
   color: ${(props) => props.color || "#595959"};
   font-size: ${(props) => props.fontSize || "16px"};
   border: ${(props) => props.border || "none"};
+
+  :disabled {
+    background-color: #ccc;
+  }
 `;
 
 export default function ButtonComponent(props) {

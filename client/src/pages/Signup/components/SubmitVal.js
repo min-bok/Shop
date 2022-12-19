@@ -16,16 +16,29 @@ const Alert = styled.p`
 `;
 
 const Wrap = styled.div`
+  position: relative;
   height: 60px;
   margin: 0 0 10px 0;
 `;
 
 export default function SubmitVal() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [emailMsg, setEmailMsg] = useState();
-  const [passwordMsg, setPasswordMsg] = useState();
-  const [passwordCheckMsg, setPasswordCheckMsg] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("password");
+  const [passwordConfirm, setPasswordConfirm] = useState("passwordConfirm");
+  const [emailMsg, setEmailMsg] = useState("");
+  const [passwordMsg, setPasswordMsg] = useState("");
+  const [passwordCheckMsg, setPasswordCheckMsg] = useState("");
+  const [verifiedEmail, setVerifiedEmail] = useState(false);
+  const [verifiedPassword, setVerifiedPassword] = useState(false);
+  const [duplication, setDuplication] = useState(true);
+
+  useEffect(() => {
+    duplicationCheck();
+  }, [email]);
+
+  useEffect(() => {
+    activeBtn();
+  }, [verifiedEmail, verifiedPassword, password]);
 
   const handleEmail = (e) => {
     const input = e.target.value;
@@ -34,12 +47,12 @@ export default function SubmitVal() {
     );
     if (regex.test(input)) {
       setEmail(input);
-      // 중복 체크 로직 넣기
-      setEmailMsg("사용할 수 있는 이메일 입니다 :)");
     } else if (input.length < 1) {
       setEmailMsg("");
+      setVerifiedEmail(false);
     } else {
       setEmailMsg("올바른 이메일 형식을 입력해주세요.");
+      setVerifiedEmail(false);
     }
   };
 
@@ -53,6 +66,8 @@ export default function SubmitVal() {
       setPasswordMsg("안전한 비밀번호 입니다 :)");
     } else if (input.length < 1) {
       setPasswordMsg("");
+    } else if (password.length !== passwordConfirm.length) {
+      setPassword("");
     } else {
       setPasswordMsg("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.");
     }
@@ -60,13 +75,30 @@ export default function SubmitVal() {
 
   const checkPassword = (e) => {
     const input = e.target.value;
-
     if (password == input) {
+      setPasswordConfirm(input);
       setPasswordCheckMsg("비밀번호가 일치합니다 :)");
+      setVerifiedPassword(true);
     } else if (input.length < 1) {
       setPasswordCheckMsg("");
+      setVerifiedPassword(false);
     } else {
       setPasswordCheckMsg("비밀번호가 일치하지않습니다.");
+      setVerifiedPassword(false);
+    }
+  };
+
+  const duplicationCheck = async () => {
+    const url = "/api/auth/duplicationCheck";
+    if (email) {
+      try {
+        const result = await axios.post(url, { val: email });
+        setEmailMsg(result.data.msg);
+        setVerifiedEmail(true);
+      } catch (err) {
+        setEmailMsg(err.response.data.msg);
+        setVerifiedEmail(false);
+      }
     }
   };
 
@@ -80,9 +112,16 @@ export default function SubmitVal() {
       });
       console.log(result);
       alert(result.data.msg);
+      window.location.href = "/login";
     } catch (err) {
-      alert(err.response.data.err);
+      alert(err.response.data.msg);
     }
+  };
+
+  const activeBtn = async () => {
+    verifiedEmail && verifiedPassword && passwordConfirm === password
+      ? setDuplication(false)
+      : setDuplication(true);
   };
 
   return (
@@ -91,6 +130,7 @@ export default function SubmitVal() {
         <Input
           method={handleEmail}
           type="email"
+          value={email}
           width="100%"
           height="40px"
           border="none"
@@ -129,7 +169,10 @@ export default function SubmitVal() {
         width="100%"
         height="40px"
         margin="30px 0 0 0"
+        disabled={duplication}
       />
     </Form>
   );
 }
+
+// 이메일 중복체크, 비밀번호 다 통과해야 버튼 활성화되게

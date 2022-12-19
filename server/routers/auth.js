@@ -4,13 +4,32 @@ import connection from "../database.js";
 
 const router = express.Router();
 
+router.post("/duplicationCheck", async (req, res) => {
+  try {
+    const params = req.body.val;
+    const query = sql["duplicationCheck"].query;
+
+    const result = await connection.query(query, params);
+
+    if (result[0][0].success == 1) {
+      throw new Error();
+    } else {
+      return res.status(200).send({
+        msg: "사용할 수 있는 이메일 입니다 :)",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(504).send({
+      msg: "이미 존재하는 이메일 입니다",
+    });
+  }
+});
+
 router.post("/signup", async (req, res) => {
   try {
     const params = req.body.val;
     const query = sql["signup"].query;
-
-    console.log(params);
-    console.log(query);
 
     const result = await connection.query(query, params);
 
@@ -19,7 +38,7 @@ router.post("/signup", async (req, res) => {
     });
   } catch (err) {
     res.status(400).send({
-      err: "회원가입에 실패하였습니다.",
+      msg: "회원가입에 실패하였습니다.",
     });
   }
 });

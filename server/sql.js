@@ -61,7 +61,7 @@ export default {
       INSERT INTO user (email, password)
       VALUES (?,?)`,
   },
-  duplicateCheck: {
+  duplicationCheck: {
     query: `
     select EXISTS (select * from user WHERE email=?) as success`,
   },
