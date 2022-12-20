@@ -12,7 +12,7 @@ const Button = styled.button`
   border: ${(props) => props.border || "none"};
 
   :disabled {
-    background-color: #ccc;
+    background-color: ${(props) => props.disabledBg || "#ccc"};
   }
 `;
 
@@ -29,6 +29,7 @@ export default function ButtonComponent(props) {
       width={props.width}
       height={props.height}
       disabled={props.disabled}
+      disabledBg={props.disabledBg}
     >
       {props.name}
     </Button>

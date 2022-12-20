@@ -50,6 +50,7 @@ export default function Counter() {
           fontSize="24px"
           border="1px solid #f2f2f2"
           disabled={disabled}
+          disabledBg="none"
         />
         <CountNum>{quantity}</CountNum>
         <ButtonComponent
