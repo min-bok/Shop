@@ -13,7 +13,7 @@ const reqSql = {
 };
 
 router.post("/:alias", async (req, res) => {
-  // if (!req.session.email) {
+  // if (!req.session.id) {
   //   return res.status(401).send({ err: "로그인이 필요한 서비스입니다." });
   // }
   try {

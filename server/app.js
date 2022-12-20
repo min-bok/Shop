@@ -1,20 +1,11 @@
 import express from "express";
 import session from "express-session";
 import routerApi from "./routers/index.js";
+import sessionObj from "./session.js";
 
 const app = express();
 
-app.use(
-  session({
-    secret: "secret code",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: false,
-      maxAge: 1000 * 60 * 60, //쿠키 유효시간 1시간
-    },
-  })
-);
+app.use(session(sessionObj));
 
 app.use(
   express.json({

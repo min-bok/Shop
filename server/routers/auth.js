@@ -2,6 +2,7 @@ import express from "express";
 import sql from "../sql.js";
 import connection from "../database.js";
 import bcrypt from "bcrypt";
+import e from "express";
 
 const router = express.Router();
 
@@ -32,7 +33,6 @@ router.post("/duplicationCheck", async (req, res) => {
   }
 });
 
-// 비밀번호 저장시 암호화 구현하기
 // 회원가입
 router.post("/signup", async (req, res) => {
   try {
@@ -54,9 +54,44 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+// 로그인
 router.post("/login", async (req, res) => {
-  req.session["email"] = "leehy0782@gmail.com";
-  res.send("login");
+  try {
+    const email = req.body.data.val[0];
+    const password = req.body.data.val[1];
+    const query = sql["login"].query;
+
+    // DB에서 email 검색
+    const result = await connection.query(query, email);
+    const user = result[0][0];
+
+    // 유저 정보가 존재하는 경우
+    if (user) {
+      // 입력받은 이메일과 저장된 유저 비밀번호가 일치하는지 비교
+      const isSame = bcrypt.compareSync(password, user.password);
+      // 비밀번호가 일치하면 로그인 성공
+      if (isSame) {
+        // 로그인 성공하면 유저 아이디를 세션에 저장
+        req.session.userId = user.id;
+        return res.status(200).send({
+          msg: "로그인 성공!",
+        });
+      } else {
+        // 비밀번호가 일치하지 않으면 에러를 발생시킴
+        throw new Error();
+      }
+    } else {
+      // 유저 정보가 존재하지 않는 경우 에러를 발생시킴
+      throw new Error();
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({
+      msg: "회원을 찾을 수 없습니다.",
+    });
+  }
+  // req.session["email"] = "leehy0782@gmail.com";
+  // res.send("login");
 });
 
 router.post("/logout", async (req, res) => {

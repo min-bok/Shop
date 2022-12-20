@@ -50,19 +50,26 @@ export default {
       VALUES (?,?,?)
     `,
   },
+  // 카트 정보 삭제
   cartListDelete: {
     query: `DELETE FROM cart WHERE product_id = ? AND user_id = ?`,
   },
   sellerList: {
     query: `select * from seller`,
   },
+  // 회원가입
   signup: {
     query: `
       INSERT INTO user (email, password)
       VALUES (?,?)`,
   },
+  // 회원가입 이메일 중복 체크
   duplicationCheck: {
     query: `
     select EXISTS (select * from user WHERE email=?) as success`,
+  },
+  // 로그인
+  login: {
+    query: `SELECT * FROM user WHERE email = ?`,
   },
 };
