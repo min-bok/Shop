@@ -101,11 +101,6 @@ export default function CartItem() {
     }
   };
 
-  // const remove = (e) => {
-  //   setRemoveId(e.target.id);
-  //   setProducts(products.filter((el) => el.id != e.target.id));
-  // };
-
   return (
     <>
       <CartHeader products={products} />

@@ -14,6 +14,11 @@ const Button = styled.button`
   :disabled {
     background-color: ${(props) => props.disabledBg || "#ccc"};
   }
+
+  :hover {
+    border: ${(props) => props.hoverBorder || "none"};
+    color: ${(props) => props.hoverColor || "none"};
+  }
 `;
 
 export default function ButtonComponent(props) {
@@ -30,6 +35,8 @@ export default function ButtonComponent(props) {
       height={props.height}
       disabled={props.disabled}
       disabledBg={props.disabledBg}
+      hoverBorder={props.hoverBorder}
+      hoverColor={props.hoverColor}
     >
       {props.name}
     </Button>

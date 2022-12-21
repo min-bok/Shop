@@ -29,6 +29,11 @@ const Logo = styled.div`
   color: #6d94cc;
 `;
 
+const SignupBtn = styled.p`
+  font-size: 12px;
+  color: #7f7f7f;
+`;
+
 export default function Login() {
   return (
     <Cont>
@@ -37,6 +42,9 @@ export default function Login() {
           <Logo>Dimple</Logo>
         </Link>
         <LoginVal />
+        <Link to="/signup">
+          <SignupBtn>회원가입</SignupBtn>
+        </Link>
       </Inner>
     </Cont>
   );

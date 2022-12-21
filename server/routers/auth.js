@@ -2,7 +2,6 @@ import express from "express";
 import sql from "../sql.js";
 import connection from "../database.js";
 import bcrypt from "bcrypt";
-import e from "express";
 
 const router = express.Router();
 
@@ -93,17 +92,17 @@ router.post("/login", async (req, res) => {
       msg: "회원을 찾을 수 없습니다.",
     });
   }
-  // req.session["email"] = "leehy0782@gmail.com";
-  // res.send("login");
 });
 
-// 로그아웃하면 세션스토리지도 비워주기
 // 로그아웃
+// 세션 스토어에서 아예 정보를 지워야할듯
 router.post("/logout", async (req, res) => {
-  // req.session.destroy();
-  req.session.userId = null;
+  // console.log(req.session);
+  // req.session.destroy(function () {
+  //   req.session;
+  // });
 
-  res.send("logout");
+  return res.send("logout");
 });
 
 export default router;

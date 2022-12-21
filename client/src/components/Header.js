@@ -7,6 +7,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 
 import ButtonComponent from "./Button";
 import InputComponent from "./Input";
+import Dropdown from "./Dropdown";
 import { useState } from "react";
 
 const Cont = styled.div`
@@ -81,14 +82,18 @@ const Wrap = styled.div`
   align-items: center;
 `;
 
+const UserWrap = styled.div`
+  position: relative;
+  z-index: 999;
+`;
+
 export default function Header() {
   const [isLogin, setIsLogin] = useState(null);
+  const [printDrop, setPrintDrop] = useState(false);
 
   useEffect(() => {
     setIsLogin(sessionStorage.getItem("userId"));
   }, []);
-
-  console.log(isLogin);
 
   const PrintSearchInput = () => {
     return (
@@ -112,6 +117,7 @@ export default function Header() {
     );
   };
 
+  // 로그인하지 않았을 때 헤더 버튼
   const PrintIsntLoginBtn = () => {
     return (
       <>
@@ -134,14 +140,25 @@ export default function Header() {
     );
   };
 
-  // 유저 누르면 뭐나오는게 좋을까
+  const printDropdown = () => {
+    if (printDrop === true) {
+      setPrintDrop(false);
+    } else {
+      setPrintDrop(true);
+    }
+  };
+
+  // 로그인했을 때 헤더 버튼
   const PrintIsLoginBtn = () => {
     return (
-      <Wrap display="flex">
+      <Wrap>
         <Link to={"/cart"}>
           <RiShoppingCartLine display="block" size="24" color="7F7F7F" />
         </Link>
-        <StyledBiUser />
+        <UserWrap>
+          <StyledBiUser onClick={printDropdown} cursor="pointer" />
+          {printDrop ? <Dropdown /> : null}
+        </UserWrap>
       </Wrap>
     );
   };
