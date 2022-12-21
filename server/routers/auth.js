@@ -74,9 +74,10 @@ router.post("/login", async (req, res) => {
         // 로그인 성공하면 유저 아이디를 세션에 저장
         req.session.userId = user.id;
 
-        // 클라이언트에 유저 아이디 값 반환
+        // 클라이언트에 유저 아이디 값과 type 반환
         return res.status(200).send({
           id: user.id,
+          type: user.type,
         });
       } else {
         // 비밀번호가 일치하지 않으면 에러를 발생시킴
@@ -96,8 +97,12 @@ router.post("/login", async (req, res) => {
   // res.send("login");
 });
 
+// 로그아웃하면 세션스토리지도 비워주기
+// 로그아웃
 router.post("/logout", async (req, res) => {
-  req.session.destroy();
+  // req.session.destroy();
+  req.session.userId = null;
+
   res.send("logout");
 });
 

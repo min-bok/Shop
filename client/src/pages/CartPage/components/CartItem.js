@@ -78,9 +78,8 @@ const TextWrap = styled(PriceWrap)`
 
 export default function CartItem() {
   const url = "/api/product/cartList";
-  const userId = 98;
+  const userId = window.sessionStorage.getItem("userId");
   const [products, setProducts] = useState([]);
-  // const [removeId, setRemoveId] = useState();
 
   useEffect(() => {
     getCartData();
@@ -96,6 +95,9 @@ export default function CartItem() {
       setProducts(result.data[0]);
     } catch (err) {
       console.log(err);
+      if (err.response.status === 401) {
+        window.location.href = "/login";
+      }
     }
   };
 

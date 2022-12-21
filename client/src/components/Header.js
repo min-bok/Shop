@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
@@ -7,6 +7,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 
 import ButtonComponent from "./Button";
 import InputComponent from "./Input";
+import { useState } from "react";
 
 const Cont = styled.div`
   width: 100%;
@@ -81,6 +82,14 @@ const Wrap = styled.div`
 `;
 
 export default function Header() {
+  const [isLogin, setIsLogin] = useState(null);
+
+  useEffect(() => {
+    setIsLogin(sessionStorage.getItem("userId"));
+  }, []);
+
+  console.log(isLogin);
+
   const PrintSearchInput = () => {
     return (
       <InputWrap>
@@ -150,8 +159,7 @@ export default function Header() {
           </Link>
           <Wrap>
             <PrintSearchInput />
-            <PrintIsntLoginBtn />
-            {/* <PrintIsLoginBtn /> */}
+            {isLogin ? <PrintIsLoginBtn /> : <PrintIsntLoginBtn />}
           </Wrap>
         </Main>
       </Inner>

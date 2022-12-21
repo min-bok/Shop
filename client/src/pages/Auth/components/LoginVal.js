@@ -49,16 +49,20 @@ export default function LoginVal() {
     const val = [email, password];
 
     try {
-      // 로그인이 성공하면 메인화면으로 이동
+      // 로그인 성공시
       const result = await axios.post(url, {
         data: {
           val,
         },
       });
 
-      console.log(result.data.id); // 유저 아이디 값
+      // express-session 써서 어떻게 못하나?
+      // 유저 아이디 값과 type을 세션스토리지에 저장
+      sessionStorage.setItem("userId", result.data.id);
+      sessionStorage.setItem("type", result.data.type); // type 1-user / 2-seller
 
-      // window.location.href = "/";
+      // 메인화면으로 이동
+      window.location.href = "/";
     } catch (err) {
       // 로그인 실패시 에러메시지를 띄우고 입력창을 초기화함
       alert(err.response.data.msg);

@@ -40,7 +40,7 @@ export default {
     query: `
     SELECT t1. *, SUM(t2.product_quantity), t4.path
     FROM product t1, cart t2, user t3, image t4
-    WHERE t1.id = t2.product_id AND t2.user_id = 98 AND t2.user_id = t3.id AND t1.id = t4.product_id AND t4.type=1
+    WHERE t1.id = t2.product_id AND t2.user_id = ? AND t2.user_id = t3.id AND t1.id = t4.product_id AND t4.type=1
     GROUP BY t1.id
     `,
   },
