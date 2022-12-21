@@ -21,7 +21,7 @@ const Wrap = styled.div`
   margin: 0 0 10px 0;
 `;
 
-export default function SubmitVal() {
+export default function SignupVal() {
   // input values
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("password");
@@ -157,7 +157,6 @@ export default function SubmitVal() {
         <Input
           method={handleEmail}
           type="email"
-          value={email}
           width="100%"
           height="40px"
           border="none"

@@ -29,6 +29,7 @@ export default function InputComponent(props) {
       onChange={props.method}
       type={props.type}
       placeholder={props.placeholder}
+      value={props.value}
       padding={props.padding}
       margin={props.margin}
       bgColor={props.bgColor}

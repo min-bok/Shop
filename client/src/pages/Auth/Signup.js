@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import SubmitVal from "./components/SubmitVal";
+import SignupVal from "./components/SignupVal";
 
 const Cont = styled.div`
   position: absolute;
-  width: 500px;
+  width: 350px;
   height: 350px;
   top: 0;
   bottom: 0;
@@ -17,7 +17,6 @@ const Cont = styled.div`
 const Inner = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
   height: 100%;
   margin: 0 auto;
   align-items: center;
@@ -37,7 +36,7 @@ export default function Signup() {
         <Link to="/">
           <Logo>Dimple</Logo>
         </Link>
-        <SubmitVal />
+        <SignupVal />
       </Inner>
     </Cont>
   );

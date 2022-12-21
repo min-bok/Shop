@@ -73,8 +73,10 @@ router.post("/login", async (req, res) => {
       if (isSame) {
         // 로그인 성공하면 유저 아이디를 세션에 저장
         req.session.userId = user.id;
+
+        // 클라이언트에 유저 아이디 값 반환
         return res.status(200).send({
-          msg: "로그인 성공!",
+          id: user.id,
         });
       } else {
         // 비밀번호가 일치하지 않으면 에러를 발생시킴
