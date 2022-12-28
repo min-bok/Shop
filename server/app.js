@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import session from "express-session";
 import dotenv from "dotenv";
@@ -6,6 +7,7 @@ import sessionObj from "./session.js";
 dotenv.config();
 
 const app = express();
+const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
