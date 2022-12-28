@@ -1,5 +1,6 @@
 # database
 /database.json
+/database-dev.json
 
 # Logs
 logs
