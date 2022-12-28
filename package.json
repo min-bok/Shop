@@ -1,0 +1,23 @@
+{
+  "name": "dimple",
+  "version": "1.0.0",
+  "description": "![erd 수정](https://user-images.githubusercontent.com/81654172/206945081-264df2a0-f95b-4388-9860-2430d380dcc4.png)",
+  "main": "index.js",
+  "scripts": {
+    "client-build": "cd client && npm ci && npm run build && cd ../",
+    "server-build": "cd server && npm ci && cd ../",
+    "heroku-prebuild": "npm run client-build && npm run server-build && move ./client/build ./server/build",
+    "start": "cd server && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minbok-1998/Shop.git"
+  },
+  "author": "hyeyeongLee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minbok-1998/Shop/issues"
+  },
+  "homepage": "https://github.com/minbok-1998/Shop#readme"
+}
