@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(session(sessionObj));
 
+app.use(express.static("build"));
+
 app.use(
   express.json({
     limit: "50mb",
