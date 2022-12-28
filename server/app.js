@@ -3,11 +3,14 @@ import session from "express-session";
 import dotenv from "dotenv";
 import routerApi from "./routers/index.js";
 import sessionObj from "./session.js";
-import path from "path";
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/./build/index.html");
+});
 
 app.use(session(sessionObj));
 
@@ -18,10 +21,6 @@ app.use(
     limit: "50mb",
   })
 );
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname + "./build/index.html"));
-});
 
 app.use("/api", routerApi);
 
