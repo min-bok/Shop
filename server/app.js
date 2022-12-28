@@ -3,6 +3,7 @@ import session from "express-session";
 import dotenv from "dotenv";
 import routerApi from "./routers/index.js";
 import sessionObj from "./session.js";
+import path from "path";
 dotenv.config();
 
 const app = express();
@@ -19,7 +20,7 @@ app.use(
 );
 
 app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/build/index.html");
+  res.sendFile(path.resolve(__dirname + "/build/index.html"));
 });
 
 app.use("/api", routerApi);
