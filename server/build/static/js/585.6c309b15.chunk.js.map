@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/585.6c309b15.chunk.js","mappings":"uKAEe,SAASA,IACtB,OAAO,uCACT,C","sources":["pages/Error/NotFound.js"],"sourcesContent":["import React from \"react\";\r\n\r\nexport default function NotFound() {\r\n  return <h1>404 error!!</h1>;\r\n}\r\n"],"names":["NotFound"],"sourceRoot":""}
