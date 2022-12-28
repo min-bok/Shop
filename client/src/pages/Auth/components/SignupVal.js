@@ -133,10 +133,8 @@ export default function SignupVal() {
       });
       console.log(result);
       // 회원가입 성공 시, 성공 alert을 띄우고 로그인 페이지로 이동
-      // alert(result.data.msg);
-      alert("회원가입이 완료되었습니다.");
-
-      // window.location.href = "/login";
+      alert(result.data.msg);
+      window.location.href = "/login";
     } catch (err) {
       // 회원가입 과정에서 에러가 발생한 경우
       alert(err.response.data.msg);

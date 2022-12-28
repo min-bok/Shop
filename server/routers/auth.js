@@ -43,11 +43,9 @@ router.post("/signup", async (req, res) => {
     const params = [id, encryptedPassowrd];
     const result = await connection.query(query, params);
 
-    return res.redirect("/api/auth/login");
-
-    // return res.status(200).send({
-    //   msg: "회원가입이 완료되었습니다.",
-    // });
+    return res.status(200).send({
+      msg: "회원가입이 완료되었습니다.",
+    });
   } catch (err) {
     res.status(400).send({
       msg: "회원가입에 실패하였습니다.",
