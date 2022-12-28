@@ -21,6 +21,7 @@ app.use(
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
 });
+
 app.use("/api", routerApi);
 
 const server = app.listen(PORT, () => {
