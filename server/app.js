@@ -18,15 +18,11 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
 });
 
 app.use("/api", routerApi);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
-});
 
 const server = app.listen(PORT, () => {
   console.log("Sever started. port 5000.");
