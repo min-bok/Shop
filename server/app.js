@@ -30,6 +30,6 @@ app.get("*", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
 });
 
-const server = app.listen(5000, () => {
+const server = app.listen(PORT, () => {
   console.log("Sever started. port 5000.");
 });

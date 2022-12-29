@@ -140,6 +140,7 @@ export default function CartItem() {
             );
           })
         ) : (
+          // 장바구니에 상품이 존재하지 않는 경우
           <NullCart />
         )}
       </>
