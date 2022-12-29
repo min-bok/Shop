@@ -56,7 +56,6 @@ export default function LoginVal() {
         },
       });
 
-      // express-session 써서 어떻게 못하나?
       // 유저 아이디 값과 type을 세션스토리지에 저장
       sessionStorage.setItem("userId", result.data.id);
       sessionStorage.setItem("type", result.data.type); // type 1-user / 2-seller

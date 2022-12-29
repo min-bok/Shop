@@ -64,7 +64,7 @@ export default function ProductList() {
   const getProductsList = async () => {
     const url = "/api/product/productList";
     try {
-      const result = await axios.post(url);
+      const result = await axios.get(url);
 
       setProduct(result.data[0]);
     } catch (err) {

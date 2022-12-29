@@ -32,7 +32,7 @@ export default function Dropdown() {
   return (
     <Cont>
       <Button name="마이페이지" />
-      <Button name="회원가입" />
+      <Button name="로그아웃" />
     </Cont>
   );
 }

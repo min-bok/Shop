@@ -14,14 +14,24 @@ const reqSql = {
   },
 };
 
+// get 요청을 처리하는 라우터
+router.get("/:alias", async (req, res) => {
+  try {
+    const alias = req?.params?.alias;
+    const params = req?.query ? req?.query : {};
+    return res.send(await reqSql.db(alias, params.val));
+  } catch (err) {
+    res.status(500).send({
+      err: "존재하지 않는 페이지 입니다.",
+    });
+  }
+});
+
 // post 요청을 처리하는 라우터
 router.post("/:alias", authMiddleware, async (req, res) => {
   try {
     const alias = req?.params?.alias;
     const params = req?.body.data ? req?.body.data : {};
-
-    // console.log(params);
-
     return res.send(await reqSql.db(alias, params.val));
   } catch (err) {
     res.status(500).send({

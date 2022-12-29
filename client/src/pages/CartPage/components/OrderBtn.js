@@ -9,11 +9,8 @@ const Wrap = styled.div`
 `;
 
 export default function OrderBtn(props) {
-  console.log(props.products);
-
   // update
   const removeItemHandle = async () => {
-    console.log(2222);
     // const url = "/api/product/cartListDelete";
     // try {
     //   const result = await axios.delete(url, {

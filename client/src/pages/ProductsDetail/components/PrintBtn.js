@@ -13,7 +13,7 @@ const BtnWrap = styled.div`
 
 export default function PrintBtn() {
   const { productId } = useParams();
-  const userId = 98; // 로그인 구현 후 변경할 것
+  const userId = sessionStorage.getItem("userId");
   const quantity = useSelector((state) => state.counter.quantity);
 
   const saveProduct = async () => {

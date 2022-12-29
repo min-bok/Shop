@@ -73,8 +73,8 @@ export default function MainImg() {
     const url = "/api/product/productMainImage";
 
     try {
-      const result = await axios.post(url, {
-        data: {
+      const result = await axios.get(url, {
+        params: {
           val: productId,
         },
       });

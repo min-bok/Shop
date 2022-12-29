@@ -94,10 +94,10 @@ export default function CartItem() {
       });
       setProducts(result.data[0]);
     } catch (err) {
-      console.log(err);
       if (err.response.status === 401) {
         window.location.href = "/login";
       }
+      console.log(err);
     }
   };
 
