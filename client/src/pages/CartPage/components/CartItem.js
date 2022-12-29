@@ -83,7 +83,7 @@ export default function CartItem() {
 
   useEffect(() => {
     getCartData();
-  }, []);
+  }, [products]);
 
   const getCartData = async () => {
     try {

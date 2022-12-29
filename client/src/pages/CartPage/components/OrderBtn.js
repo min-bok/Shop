@@ -9,24 +9,9 @@ const Wrap = styled.div`
 `;
 
 export default function OrderBtn(props) {
-  // update
-  const removeItemHandle = async () => {
-    // const url = "/api/product/cartListDelete";
-    // try {
-    //   const result = await axios.delete(url, {
-    //     data: {
-    //       1,
-    //     },
-    //   });
-    //   return result;
-    // } catch (err) {
-    //   console.log(err);
-    // }
-  };
   return (
     <Wrap>
       <ButtonComponent
-        method={removeItemHandle}
         name="상품 주문 하기"
         padding="8px 60px"
         margin="40px 0 0 0"

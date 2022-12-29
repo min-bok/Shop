@@ -41,12 +41,10 @@ router.post("/:alias", authMiddleware, async (req, res) => {
 });
 
 // delete 요청을 처리하는 라우터
-router.post("/:alias", authMiddleware, async (req, res) => {
+router.delete("/:alias", authMiddleware, async (req, res) => {
   try {
     const alias = req?.params?.alias;
-    const params = req?.body.data ? req?.body.data : {};
-
-    // console.log(params);
+    const params = req?.body ? req?.body : {};
 
     return res.send(await reqSql.db(alias, params.val));
   } catch (err) {
