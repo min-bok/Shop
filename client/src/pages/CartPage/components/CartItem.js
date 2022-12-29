@@ -4,6 +4,7 @@ import axios from "axios";
 import RemoveBtn from "./RemoveBtn";
 import CartHeader from "./CartHeader";
 import OrderBtn from "./OrderBtn";
+import NullCart from "./NullCart";
 
 const Cont = styled.div`
   position: relative;
@@ -104,39 +105,44 @@ export default function CartItem() {
   return (
     <>
       <CartHeader products={products} />
-      {products &&
-        products.map((data) => {
-          return (
-            <Cont key={data.id}>
-              <ProductImg src={data.path} />
-              <TextWrap>
-                <ProductName>{data.product_name}</ProductName>
-                <Brand>
-                  개당 {data.product_price.toLocaleString("ko-KR")}원
-                </Brand>
-                <Delivery>
-                  택배배송 / {data.delivery_price.toLocaleString("ko-KR")}
-                </Delivery>
-              </TextWrap>
+      <>
+        {products[0] ? (
+          products.map((data) => {
+            return (
+              <Cont key={data.id}>
+                <ProductImg src={data.path} />
+                <TextWrap>
+                  <ProductName>{data.product_name}</ProductName>
+                  <Brand>
+                    개당 {data.product_price.toLocaleString("ko-KR")}원
+                  </Brand>
+                  <Delivery>
+                    택배배송 / {data.delivery_price.toLocaleString("ko-KR")}
+                  </Delivery>
+                </TextWrap>
 
-              <QuantityWrap>
-                <QuantityText>수량</QuantityText>
-                <QuantityNum>{data[`SUM(t2.product_quantity)`]}</QuantityNum>
-              </QuantityWrap>
+                <QuantityWrap>
+                  <QuantityText>수량</QuantityText>
+                  <QuantityNum>{data[`SUM(t2.product_quantity)`]}</QuantityNum>
+                </QuantityWrap>
 
-              <PriceWrap>
-                <RemoveBtn productId={data.id} />
-                <TotalPrice>
-                  \
-                  {(
-                    data[`SUM(t2.product_quantity)`] * data.product_price
-                  ).toLocaleString("ko-KR")}
-                  원
-                </TotalPrice>
-              </PriceWrap>
-            </Cont>
-          );
-        })}
+                <PriceWrap>
+                  <RemoveBtn productId={data.id} />
+                  <TotalPrice>
+                    \
+                    {(
+                      data[`SUM(t2.product_quantity)`] * data.product_price
+                    ).toLocaleString("ko-KR")}
+                    원
+                  </TotalPrice>
+                </PriceWrap>
+              </Cont>
+            );
+          })
+        ) : (
+          <NullCart />
+        )}
+      </>
       <OrderBtn products={products} />
     </>
   );
