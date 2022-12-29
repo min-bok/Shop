@@ -10,13 +10,9 @@ const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/./build/index.html");
-});
+app.use(express.static("build"));
 
 app.use(session(sessionObj));
-
-app.use(express.static("build"));
 
 app.use(
   express.json({
@@ -25,6 +21,14 @@ app.use(
 );
 
 app.use("/api", routerApi);
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/build/index.html");
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/build/index.html");
+});
 
 const server = app.listen(PORT, () => {
   console.log("Sever started. port 5000.");
