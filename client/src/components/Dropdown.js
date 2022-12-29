@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ButtonComponent from "./Button";
+import axios from "axios";
 
 const Cont = styled.div`
   width: 120px;
@@ -19,6 +20,7 @@ export default function Dropdown() {
     return (
       <ButtonComponent
         name={props.name}
+        method={props.method}
         width="70%"
         bgColor="#fdfdfd"
         fontSize="12px"
@@ -29,10 +31,17 @@ export default function Dropdown() {
     );
   };
 
+  const logout = async () => {
+    window.confirm("로그아웃 하시겠습니까?");
+    const result = await axios.post("/api/auth/logout");
+    sessionStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <Cont>
       <Button name="마이페이지" />
-      <Button name="로그아웃" />
+      <Button name="로그아웃" method={logout} />
     </Cont>
   );
 }

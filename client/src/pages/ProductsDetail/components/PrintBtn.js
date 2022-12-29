@@ -26,7 +26,6 @@ export default function PrintBtn() {
           val,
         },
       });
-      console.log(result);
     } catch (err) {
       console.log(err);
     }

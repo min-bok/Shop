@@ -95,13 +95,8 @@ router.post("/login", async (req, res) => {
 });
 
 // 로그아웃
-// 세션 스토어에서 아예 정보를 지워야할듯
 router.post("/logout", async (req, res) => {
-  // console.log(req.session);
-  // req.session.destroy(function () {
-  //   req.session;
-  // });
-
+  req.session.destroy();
   return res.send("logout");
 });
 
