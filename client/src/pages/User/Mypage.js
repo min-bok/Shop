@@ -17,6 +17,11 @@ const Cont = styled.div`
   background-color: pink;
 `;
 
+const Input = styled.input`
+  width: 100%;
+  height: 40px;
+`;
+
 export default function Mypage() {
   const userId = window.sessionStorage.getItem("userId");
   const [name, setName] = useState("");
@@ -49,20 +54,33 @@ export default function Mypage() {
       console.log(err);
     }
   };
-  const Input = (props) => {
-    return (
-      <InputComponent
-        method={props.method}
-        width="100%"
-        height="40px"
-        border="none"
-        type={props.type}
-        value={props.value}
-        placeholder={props.placeholder}
-        focus="2px solid #6D94CC"
-      />
-    );
+
+  const handleName = (e) => {
+    setName(e.target.value);
   };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePhone = (e) => {
+    setPhone(e.target.value);
+  };
+
+  //   const Input = (props) => {
+  //     return (
+  //       <InputComponent
+  //         method={props.method}
+  //         width="100%"
+  //         height="40px"
+  //         border="none"
+  //         type={props.type}
+  //         value={props.value}
+  //         placeholder={props.placeholder}
+  //         focus="2px solid #6D94CC"
+  //       />
+  //     );
+  //   };
 
   const Button = (props) => {
     return (
@@ -74,18 +92,22 @@ export default function Mypage() {
     );
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    console.log(email);
-  };
-
   return (
     <Cont>
-      <Input placeholder="이름" />
-      <Input placeholder="이메일" value={email} method={handleEmail} />
+      <Input
+        placeholder="이름"
+        value={name ? name : ""}
+        onChange={handleName}
+      />
+      <Input placeholder="이메일" value={email} onChange={handleEmail} />
       <Input placeholder="비밀번호" type="password" />
       <Button name="비밀번호 변경하기" bgColor="#f2f2f2" />
-      <Input placeholder="전화번호" />
+      <Input
+        type="tel"
+        placeholder="전화번호"
+        value={phone ? phone : ""}
+        onChange={handlePhone}
+      />
       <Input placeholder="도로명주소" />
       <Input placeholder="상세주소" />
       <Input placeholder="우편번호" />
