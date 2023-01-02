@@ -31,6 +31,12 @@ export default function Dropdown() {
     );
   };
 
+  // 마이페이지로 이동
+  const movetoMypage = () => {
+    window.location.href = "/mypage";
+  };
+
+  // 로그아웃, 세션 및 세션 스토리지 삭제를 수행
   const logout = async () => {
     window.confirm("로그아웃 하시겠습니까?");
     const result = await axios.post("/api/auth/logout");
@@ -40,7 +46,7 @@ export default function Dropdown() {
 
   return (
     <Cont>
-      <Button name="마이페이지" />
+      <Button name="마이페이지" method={movetoMypage} />
       <Button name="로그아웃" method={logout} />
     </Cont>
   );

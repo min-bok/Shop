@@ -72,4 +72,8 @@ export default {
   login: {
     query: `SELECT * FROM user WHERE email = ?`,
   },
+  // 유저 정보 가져오기
+  getUserData: {
+    query: `SELECT * FROM user WHERE id = ?;`,
+  },
 };

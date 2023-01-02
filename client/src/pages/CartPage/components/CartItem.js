@@ -129,7 +129,6 @@ export default function CartItem() {
                 <PriceWrap>
                   <RemoveBtn productId={data.id} />
                   <TotalPrice>
-                    \
                     {(
                       data[`SUM(t2.product_quantity)`] * data.product_price
                     ).toLocaleString("ko-KR")}
