@@ -3,26 +3,36 @@ import styled from "styled-components";
 import ButtonComponent from "../../components/Button";
 import axios from "axios";
 import UpdataBtn from "./components/UpdataBtn";
-import PostCode from "react-daum-postcode";
+import { Link } from "react-router-dom";
+import DaumPostcode from "./components/DaumPostcode";
 
 const Cont = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   position: absolute;
   width: 350px;
-  height: 50vh;
+  height: 55vh;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  /* background-color: pink; */
+`;
+
+const Logo = styled.div`
+  font-size: 36px;
+  font-weight: 700;
+  color: #6d94cc;
 `;
 
 const Inner = styled.div`
-  height: 90%;
+  width: 100%;
+  height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* background-color: bisque; */
 `;
 
 const Wrap = styled.div`
@@ -47,6 +57,9 @@ export default function Mypage() {
   const [detail, setDetail] = useState("");
   const [postCode, setPostCode] = useState("");
   const [phone, setPhone] = useState("");
+
+  // 주소 검색 모달 제어
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     getInitUserData();
@@ -112,10 +125,16 @@ export default function Mypage() {
     setPostCode(e.target.value);
   };
 
+  // 모달 창 열기
+  const open = () => {
+    setActive(true);
+  };
+
   const Button = (props) => {
     return (
       <ButtonComponent
         name={props.name}
+        method={props.method}
         width={props.width}
         height={props.height}
         bgColor={props.bgColor}
@@ -125,15 +144,27 @@ export default function Mypage() {
     );
   };
 
+  console.log(active);
+  console.log(address);
+  console.log(postCode);
+
   return (
     <Cont>
+      <Link to="/">
+        <Logo>Dimple</Logo>
+      </Link>
       <Inner>
         <Input
           placeholder="이름"
           value={name ? name : ""}
           onChange={handleName}
         />
-        <Input placeholder="이메일" value={email} onChange={handleEmail} />
+        <Input
+          placeholder="이메일"
+          value={email}
+          onChange={handleEmail}
+          disabled
+        />
         <Wrap>
           <Input
             placeholder="비밀번호"
@@ -177,6 +208,7 @@ export default function Mypage() {
             width="90px"
             bgColor="#f2f2f2"
             fontSize="10px"
+            method={open}
           />
         </Wrap>
         <UpdataBtn
@@ -187,12 +219,10 @@ export default function Mypage() {
           postCode={postCode}
           phone={phone}
         />
-        {/* <PostCode
-        // onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
-        autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-        defaultQuery="판교역로 235" // 팝업을 열때 기본적으로 입력되는 검색어
-      /> */}
       </Inner>
+      {active ? (
+        <DaumPostcode setAddress={setAddress} setPostCode={setPostCode} />
+      ) : null}
     </Cont>
   );
 }

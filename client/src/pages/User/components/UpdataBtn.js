@@ -15,6 +15,7 @@ export default function UpdataBtn(props) {
         props.phone,
         props.userId,
       ];
+
       const result = axios.put(url, {
         val,
       });

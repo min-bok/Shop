@@ -16,7 +16,7 @@ const reqSql = {
 };
 
 // put 요청을 처리하는 라우터
-router.put("/:alias", authMiddleware, async (req, res) => {
+router.put("/:alias", async (req, res) => {
   try {
     const alias = req?.params?.alias;
     const params = req?.body?.val ? req?.body?.val : {};

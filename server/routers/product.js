@@ -33,8 +33,6 @@ router.post("/:alias", authMiddleware, async (req, res) => {
     const alias = req?.params?.alias;
     const params = req?.body.data ? req?.body.data.val : {};
 
-    console.log(req.body.data.val);
-
     return res.send(await reqSql.db(alias, params));
   } catch (err) {
     res.status(500).send({
@@ -60,9 +58,6 @@ router.delete("/:alias", authMiddleware, async (req, res) => {
 router.delete("/:alias", async (req, res) => {
   let params = req.body;
   const alias = req?.params?.alias;
-
-  // console.log(params.val);
-  // console.log(alias);
 
   try {
     return res.send(await reqSql.db(alias, params.val));
