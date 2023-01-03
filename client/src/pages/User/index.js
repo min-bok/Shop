@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import ButtonComponent from "../../components/Button";
+import Button from "../../components/Button";
 import axios from "axios";
 import UpdataBtn from "./components/UpdataBtn";
 import { Link } from "react-router-dom";
 import DaumPostcode from "./components/DaumPostcode";
+import UpdatePassword from "./UpdatePassword";
 
 const Cont = styled.div`
   display: flex;
@@ -52,7 +53,8 @@ export default function Mypage() {
   // 사용자 정보 state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [initPassword, setInitPassword] = useState("");
+  const [password, setPassword] = useState("expassword");
   const [address, setAddress] = useState("");
   const [detail, setDetail] = useState("");
   const [postCode, setPostCode] = useState("");
@@ -60,6 +62,8 @@ export default function Mypage() {
 
   // 주소 검색 모달 제어
   const [active, setActive] = useState(false);
+  //  비밀번호 input disable 제어
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     getInitUserData();
@@ -79,7 +83,7 @@ export default function Mypage() {
 
       setName(data.name);
       setEmail(data.email);
-      setPassword(data.password);
+      setInitPassword(data.password);
       setAddress(data.address);
       setPhone(data.phone_number);
       setDetail(data.detail_address);
@@ -97,6 +101,11 @@ export default function Mypage() {
   // 이메일 onChange 함수
   const handleEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  // 바말번호 onChange 함수
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
   };
 
   // 휴대폰 번호 onChange 함수
@@ -130,23 +139,7 @@ export default function Mypage() {
     setActive(true);
   };
 
-  const Button = (props) => {
-    return (
-      <ButtonComponent
-        name={props.name}
-        method={props.method}
-        width={props.width}
-        height={props.height}
-        bgColor={props.bgColor}
-        color={props.color}
-        fontSize={props.fontSize}
-      />
-    );
-  };
-
-  console.log(active);
-  console.log(address);
-  console.log(postCode);
+  console.log(password);
 
   return (
     <Cont>
@@ -168,16 +161,19 @@ export default function Mypage() {
         <Wrap>
           <Input
             placeholder="비밀번호"
-            value="12345678"
+            value={password}
             type="password"
             width="70%"
-            disabled
+            onChange={handlePassword}
+            disabled={disabled}
           />
-          <Button
-            name="비밀번호 변경"
-            width="90px"
-            bgColor="#f2f2f2"
-            fontSize="10px"
+          <UpdatePassword
+            userId={userId}
+            initPassword={initPassword}
+            password={password}
+            setPassword={setPassword}
+            disabled={disabled}
+            setDisabled={setDisabled}
           />
         </Wrap>
         <Input

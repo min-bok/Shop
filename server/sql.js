@@ -80,4 +80,8 @@ export default {
   updateUserData: {
     query: `UPDATE user SET name = ?, address = ?, detail_address= ?, post_code= ?, phone_number= ? WHERE id = ?`,
   },
+  // 유저 비밀번호 수정
+  updateUserPassword: {
+    query: `UPDATE user SET password = ? WHERE id = ?`,
+  },
 };

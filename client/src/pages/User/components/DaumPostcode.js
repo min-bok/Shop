@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
 export default function SerchAddress(props) {
-  const [test, setTest] = useState("");
   const postCodeStyle = {
     display: "block",
     position: "absolute",
