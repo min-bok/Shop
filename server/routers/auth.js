@@ -118,8 +118,9 @@ router.put("/updateUserPassword", async (req, res) => {
       const encryptedPassowrd = bcrypt.hashSync(updataPassword, 10);
       const params = [encryptedPassowrd, userId];
       const result = await connection.query(query, params);
-
-      return result;
+      res.status(200).send({
+        msg: "비밀번호 변경 완료 :)",
+      });
     } else {
       res.status(400).send({
         msg: "현재 비밀번호와 동일합니다.",

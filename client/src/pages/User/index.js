@@ -47,14 +47,32 @@ const Input = styled.input`
   border: none;
 `;
 
+const PasswordWrap = styled.div`
+  position: relative;
+  height: 60px;
+  margin: 0 0 -10px 0;
+`;
+
+const Alert = styled.p`
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #6d94cc;
+`;
+
 export default function Mypage() {
   // 사용자 고유 id
   const userId = window.sessionStorage.getItem("userId");
   // 사용자 정보 state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  //  db에 존재하는 최초 비밀번호
   const [initPassword, setInitPassword] = useState("");
+  //  value 및 유효성 검증을 위한 비밀번호
   const [password, setPassword] = useState("expassword");
+  //  실제로 update를 실행할 비밀번호
+  const [newPassword, setNewPassword] = useState("");
+
   const [address, setAddress] = useState("");
   const [detail, setDetail] = useState("");
   const [postCode, setPostCode] = useState("");
@@ -62,8 +80,10 @@ export default function Mypage() {
 
   // 주소 검색 모달 제어
   const [active, setActive] = useState(false);
-  //  비밀번호 input disable 제어
+  // 비밀번호 input disable 제어
   const [disabled, setDisabled] = useState(true);
+  // 비밀번호 유효성 검증 메시지
+  const [passwordMsg, setPasswordMsg] = useState("");
 
   useEffect(() => {
     getInitUserData();
@@ -103,9 +123,29 @@ export default function Mypage() {
     setEmail(e.target.value);
   };
 
-  // 바말번호 onChange 함수
+  // 비밀번호 onChange 함수
   const handlePassword = (e) => {
+    // 비밀번호 유효성 검증
+    const regex = new RegExp(
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
+    );
+
     setPassword(e.target.value);
+    // 입력된 값이 비밀번호 유효성 검증을 통과한 경우
+    if (regex.test(e.target.value)) {
+      setPassword(e.target.value);
+      setNewPassword(e.target.value); //  실제로 변경될 비밀번호
+      setPasswordMsg("안전한 비밀번호 입니다 :)");
+    } else if (e.target.value.length == 0) {
+      // 입력값이 존재하지 않을 때
+      setPasswordMsg("");
+      setNewPassword("");
+    } else {
+      // 입력된 값이 비밀번호 유효성 검증을 통과하지 못한 경우
+      setPassword(e.target.value);
+      setNewPassword("");
+      setPasswordMsg("숫자+영문자+특수문자 8자리 이상 입력해주세요.");
+    }
   };
 
   // 휴대폰 번호 onChange 함수
@@ -139,8 +179,6 @@ export default function Mypage() {
     setActive(true);
   };
 
-  console.log(password);
-
   return (
     <Cont>
       <Link to="/">
@@ -159,18 +197,22 @@ export default function Mypage() {
           disabled
         />
         <Wrap>
-          <Input
-            placeholder="비밀번호"
-            value={password}
-            type="password"
-            width="70%"
-            onChange={handlePassword}
-            disabled={disabled}
-          />
+          <PasswordWrap>
+            <Input
+              placeholder="비밀번호"
+              value={password}
+              type="password"
+              width="70%"
+              margin="0 0 100px 0"
+              onChange={handlePassword}
+              disabled={disabled}
+            />
+            <Alert>{passwordMsg}</Alert>
+          </PasswordWrap>
           <UpdatePassword
             userId={userId}
             initPassword={initPassword}
-            password={password}
+            newPassword={newPassword}
             setPassword={setPassword}
             disabled={disabled}
             setDisabled={setDisabled}
