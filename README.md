@@ -4,7 +4,7 @@ https://dimple-server.herokuapp.com/
 
 ### 테스트 계정
 
-test@test.com
+test@test.com</br>
 a!!12345
 
 ## DB ERD
