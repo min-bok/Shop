@@ -31,8 +31,9 @@ router.get("/:alias", async (req, res) => {
 router.post("/:alias", authMiddleware, async (req, res) => {
   try {
     const alias = req?.params?.alias;
-    const params = req?.body.data ? req?.body.data : {};
-    return res.send(await reqSql.db(alias, params.val));
+    const params = req?.body.data ? req?.body.data.val : {};
+
+    return res.send(await reqSql.db(alias, params));
   } catch (err) {
     res.status(500).send({
       err: "존재하지 않는 페이지 입니다.",
@@ -57,9 +58,6 @@ router.delete("/:alias", authMiddleware, async (req, res) => {
 router.delete("/:alias", async (req, res) => {
   let params = req.body;
   const alias = req?.params?.alias;
-
-  // console.log(params.val);
-  // console.log(alias);
 
   try {
     return res.send(await reqSql.db(alias, params.val));
