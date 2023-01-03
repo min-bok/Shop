@@ -100,4 +100,37 @@ router.post("/logout", async (req, res) => {
   return res.send("logout");
 });
 
+// 비밀번호 변경
+router.put("/updateUserPassword", async (req, res) => {
+  try {
+    const params = req?.body?.val ? req?.body?.val : {};
+    const initPassword = params[0];
+    const updataPassword = params[1];
+    const userId = params[2];
+
+    // 현재 비밀번호와 변경할 비밀번호가 다른지 확인
+    const isSame = bcrypt.compareSync(updataPassword, initPassword);
+
+    // 변경할 비밀번호가 현재 비밀번호와 달라야 비밀번호 변경을 수행
+    if (!isSame) {
+      const query = sql["updateUserPassword"].query;
+      // 변경할 비밀번호를 암호화하여 저장
+      const encryptedPassowrd = bcrypt.hashSync(updataPassword, 10);
+      const params = [encryptedPassowrd, userId];
+      const result = await connection.query(query, params);
+      res.status(200).send({
+        msg: "비밀번호 변경 완료 :)",
+      });
+    } else {
+      res.status(400).send({
+        msg: "현재 비밀번호와 동일합니다.",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      err: "수정을 완료하지 못했습니다.",
+    });
+  }
+});
+
 export default router;
