@@ -74,6 +74,10 @@ export default {
   },
   // 유저 정보 가져오기
   getUserData: {
-    query: `SELECT * FROM user WHERE id = ?;`,
+    query: `SELECT * FROM user WHERE id = ?`,
+  },
+  // 유저 정보 수정
+  updateUserData: {
+    query: `UPDATE user SET name = ?, address = ?, detail_address= ?, post_code= ?, phone_number= ? WHERE id = ?`,
   },
 };

@@ -8,7 +8,7 @@ const ProductDetail = lazy(() => import("./pages/ProductsDetail"));
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Signup = lazy(() => import("./pages/Auth/Signup"));
 const Cart = lazy(() => import("./pages/CartPage"));
-const Mypage = lazy(() => import("./pages/User/Mypage"));
+const Mypage = lazy(() => import("./pages/User"));
 const NotFound = lazy(() => import("./pages/Error/NotFound"));
 
 export default function App() {

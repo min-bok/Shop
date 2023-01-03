@@ -126,6 +126,7 @@ export default function Header() {
             name="로그인"
             bgColor="#FDFDFD"
             border="0.5px solid rgba(204, 204, 204, 1)"
+            hoverBorder="0.5px solid rgba(204, 204, 204, 1)"
             height="33px"
           />
         </Link>
