@@ -7,6 +7,8 @@ import { useEffect } from "react";
 export default function UpdatePassword(props) {
   // 버튼 disabled를 관리
   const [disabled, setDisabled] = useState(true);
+  // 비밀번호 변경 여부를 관리
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     checkPassword();
@@ -27,9 +29,10 @@ export default function UpdatePassword(props) {
       <ButtonComponent
         name={props.name}
         method={props.method}
-        width="90px"
+        width={props.width}
         height="40px"
-        bgColor="#f2f2f2"
+        color={props.color}
+        bgColor={props.bgColor}
         fontSize="10px"
         disabled={props.disabled}
       />
@@ -47,7 +50,8 @@ export default function UpdatePassword(props) {
     try {
       const result = await axios.put(url, { val });
       alert("비밀번호가 변경되었습니다 :)");
-      window.location.reload();
+      setIsUpdate(true);
+      // window.location.reload();
     } catch (err) {
       console.log(err);
       if (err.request.status === 400) {
@@ -60,9 +64,24 @@ export default function UpdatePassword(props) {
   return (
     <>
       {props.disabled ? (
-        <Button name="비밀번호 변경" method={inputDisable} />
+        isUpdate ? (
+          <Button name="✓" width="50px" bgColor="#FFAF93" color="#fdfdfd" />
+        ) : (
+          <Button
+            name="비밀번호 변경"
+            method={inputDisable}
+            width="90px"
+            bgColor="#f2f2f2"
+          />
+        )
       ) : (
-        <Button name="변경 완료" method={updatePassword} disabled={disabled} />
+        <Button
+          name="변경 완료"
+          method={updatePassword}
+          disabled={disabled}
+          width="90px"
+          bgColor="#f2f2f2"
+        />
       )}
     </>
   );

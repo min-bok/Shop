@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { BiUser } from "react-icons/bi";
 import { RiShoppingCartLine } from "react-icons/ri";
+import LogoImg from "../assets/logo.png";
 
 import ButtonComponent from "./Button";
 import InputComponent from "./Input";
@@ -12,7 +13,7 @@ import { useState } from "react";
 
 const Cont = styled.div`
   width: 100%;
-  height: 104px;
+  height: auto;
   background: #fdfdfd;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
 `;
@@ -48,10 +49,10 @@ const Main = styled.div`
   justify-content: space-between;
 `;
 
-const Logo = styled.div`
-  font-size: 24px;
-  font-weight: 700;
-  color: #6d94cc;
+const Logo = styled.img`
+  width: 38px;
+  height: 38px;
+  background-size: cover;
 `;
 
 const InputWrap = styled.form`
@@ -105,7 +106,6 @@ export default function Header() {
           height="33px"
           bgColor="#f2f2f2"
           padding="0 40px"
-          outline="1.25px solid #6d94cc"
           margin="0 40px 0 0"
           color="#7F7F7F"
           border="none"
@@ -125,8 +125,8 @@ export default function Header() {
           <ButtonComponent
             name="로그인"
             bgColor="#FDFDFD"
-            border="0.5px solid rgba(204, 204, 204, 1)"
-            hoverBorder="0.5px solid rgba(204, 204, 204, 1)"
+            border="0.5px solid rgba(204, 204, 204, 0.5)"
+            hoverBorder="0.5px solid rgba(204, 204, 204, 0.5)"
             height="33px"
           />
         </Link>
@@ -170,10 +170,9 @@ export default function Header() {
         <Sub>
           <GosellerPageBtn>판매자 페이지로 이동</GosellerPageBtn>
         </Sub>
-
         <Main>
           <Link to={"/"}>
-            <Logo>Dimple</Logo>
+            <Logo src={LogoImg} />
           </Link>
           <Wrap>
             <PrintSearchInput />

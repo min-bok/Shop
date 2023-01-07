@@ -80,7 +80,7 @@ export default function LoginVal() {
         height="40px"
         border="none"
         placeholder="이메일"
-        focus="2px solid #6D94CC"
+        focus="2px solid #1527CE"
         value={email}
       />
       <Input
@@ -90,7 +90,7 @@ export default function LoginVal() {
         height="40px"
         border="none"
         placeholder="비밀번호"
-        focus="2px solid #6D94CC"
+        focus="2px solid #1527CE"
         margin="40px 0 0 0"
         value={password}
       />

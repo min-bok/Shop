@@ -19,7 +19,6 @@ export default function UpdataBtn(props) {
       const result = axios.put(url, {
         val,
       });
-
       alert("수정이 완료되었습니다.");
       window.location.reload();
     } catch (err) {

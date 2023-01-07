@@ -6,6 +6,7 @@ import UpdataBtn from "./components/UpdataBtn";
 import { Link } from "react-router-dom";
 import DaumPostcode from "./components/DaumPostcode";
 import UpdatePassword from "./UpdatePassword";
+import LogoImg from "../../assets/logo.png";
 
 const Cont = styled.div`
   display: flex;
@@ -22,10 +23,11 @@ const Cont = styled.div`
   margin: auto;
 `;
 
-const Logo = styled.div`
-  font-size: 36px;
-  font-weight: 700;
-  color: #6d94cc;
+const Logo = styled.img`
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  margin-bottom: 30px;
 `;
 
 const Inner = styled.div`
@@ -57,7 +59,7 @@ const Alert = styled.p`
   font-size: 10px;
   line-height: 20px;
   font-weight: 700;
-  color: #6d94cc;
+  color: #1527ce;
 `;
 
 export default function Mypage() {
@@ -182,7 +184,7 @@ export default function Mypage() {
   return (
     <Cont>
       <Link to="/">
-        <Logo>Dimple</Logo>
+        <Logo src={LogoImg} />
       </Link>
       <Inner>
         <Input
@@ -202,7 +204,6 @@ export default function Mypage() {
               placeholder="비밀번호"
               value={password}
               type="password"
-              width="70%"
               margin="0 0 100px 0"
               onChange={handlePassword}
               disabled={disabled}

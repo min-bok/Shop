@@ -9,7 +9,6 @@ const router = express.Router();
 const reqSql = {
   async db(alias, params) {
     const query = sql[alias].query;
-
     const result = await connection.query(query, params);
     return result;
   },

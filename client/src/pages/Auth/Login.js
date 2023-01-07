@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LoginVal from "./components/LoginVal";
+import LogoImg from "../../assets/logo.png";
 
 const Cont = styled.div`
   position: absolute;
   width: 350px;
-  height: 300px;
+  height: 330px;
   top: 0;
   bottom: 0;
   left: 0;
@@ -23,10 +24,11 @@ const Inner = styled.div`
   justify-content: space-between;
 `;
 
-const Logo = styled.div`
-  font-size: 36px;
-  font-weight: 700;
-  color: #6d94cc;
+const Logo = styled.img`
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  margin-bottom: 30px;
 `;
 
 const SignupBtn = styled.p`
@@ -39,7 +41,7 @@ export default function Login() {
     <Cont>
       <Inner>
         <Link to="/">
-          <Logo>Dimple</Logo>
+          <Logo src={LogoImg} />
         </Link>
         <LoginVal />
         <Link to="/signup">

@@ -12,7 +12,7 @@ const Alert = styled.p`
   font-size: 12px;
   line-height: 20px;
   font-weight: 700;
-  color: #6d94cc;
+  color: #1527ce;
 `;
 
 const Wrap = styled.div`
@@ -161,7 +161,7 @@ export default function SignupVal() {
           height="40px"
           border="none"
           placeholder="이메일"
-          focus="2px solid #6D94CC"
+          focus="2px solid #1527CE"
         />
         <Alert>{emailMsg}</Alert>
       </Wrap>
@@ -173,7 +173,7 @@ export default function SignupVal() {
           height="40px"
           border="none"
           placeholder="비밀번호"
-          focus="2px solid #6D94CC"
+          focus="2px solid #1527CE"
         />
         <Alert>{passwordMsg}</Alert>
       </Wrap>
@@ -184,7 +184,7 @@ export default function SignupVal() {
           width="100%"
           height="40px"
           border="none"
-          focus="2px solid #6D94CC"
+          focus="2px solid #1527CE"
           placeholder="비밀번호 확인"
         />
         <Alert>{passwordConfirmMsg}</Alert>
