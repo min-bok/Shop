@@ -1,9 +1,8 @@
 /* Slider */
 .slick-slider {
-  height: 320px;
+  height: auto;
   background: #f2f2f2;
   position: relative;
-  padding-top: 5.625rem;
 
   display: block;
   box-sizing: border-box;
@@ -22,8 +21,8 @@
 
 .slick-list {
   position: relative;
-
   display: block;
+
   overflow: hidden;
 
   margin: 0;
@@ -79,7 +78,9 @@
   float: right;
 }
 .slick-slide img {
-  display: block;
+  width: 100vw;
+  height: auto;
+  background-size: cover;
 }
 .slick-slide.slick-loading img {
   display: none;
