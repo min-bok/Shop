@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 // import fs from "fs";
-// dev;
+// // dev;
 // const data = fs.readFileSync("./database.json");
 // const conf = JSON.parse(data);
 

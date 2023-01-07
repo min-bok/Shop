@@ -168,7 +168,7 @@ export default function Header() {
     <Cont>
       <Inner>
         <Sub>
-          <GosellerPageBtn>판매자 페이지로 이동</GosellerPageBtn>
+          {/* <GosellerPageBtn>판매자 페이지로 이동</GosellerPageBtn> */}
         </Sub>
         <Main>
           <Link to={"/"}>

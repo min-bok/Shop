@@ -3,7 +3,9 @@ import Slider from "react-slick";
 import "../style/slick.css";
 import "../style/slick-theme.css";
 
-import img from "../assets/adex.png";
+import adOne from "../assets/adOne.jpg";
+import adTwo from "../assets/adTwo.jpg";
+import adThree from "../assets/adThree.jpg";
 
 export default class SimpleSlider extends Component {
   render() {
@@ -19,10 +21,13 @@ export default class SimpleSlider extends Component {
       <div>
         <Slider {...settings}>
           <div>
-            <img src={img} alt="" />
+            <img src={adOne} alt="" />
           </div>
           <div>
-            <h3>2</h3>
+            <img src={adTwo} alt="" />
+          </div>
+          <div>
+            <img src={adThree} alt="" />
           </div>
         </Slider>
       </div>
