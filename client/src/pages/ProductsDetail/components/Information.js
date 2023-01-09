@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import Counter from "../../../components/Counter";
 import PrintBtn from "./PrintBtn";
@@ -21,23 +23,53 @@ const Delivery = styled.p`
 `;
 const OutboundDays = styled(Delivery)``;
 
-export default function Information(props) {
+export default function Information() {
+  const { productId } = useParams();
+  const [info, setInfo] = useState();
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  const getInfo = async () => {
+    const url = "/api/product/productDetail";
+
+    try {
+      const result = await axios.get(url, {
+        params: {
+          val: productId,
+        },
+      });
+
+      setInfo(result.data[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <Cont key={props.data.id}>
-      <Name>{props.data.product_name}</Name>
-      <Price>{props.data.product_price.toLocaleString("ko-KR")}원</Price>
-      <div>
-        <Delivery>
-          배송비 {props.data.delivery_price.toLocaleString("ko-KR")}원 /
-          도서산간(제주도) 배송비 추가
-          {props.data.add_delivery_price.toLocaleString("ko-KR")}원
-        </Delivery>
-        <OutboundDays>
-          {props.data.outbound_days}일 이내 출고 (주말, 공휴일 제외)
-        </OutboundDays>
-      </div>
-      <Counter />
-      <PrintBtn />
-    </Cont>
+    <>
+      {info &&
+        info.map((data) => {
+          return (
+            <Cont key={data.id}>
+              <Name>{data.product_name}</Name>
+              <Price>{data.product_price.toLocaleString("ko-KR")}원</Price>
+              <div>
+                <Delivery>
+                  배송비 {data.delivery_price.toLocaleString("ko-KR")}원 /
+                  도서산간(제주도) 배송비 추가
+                  {data.add_delivery_price.toLocaleString("ko-KR")}원
+                </Delivery>
+                <OutboundDays>
+                  {data.outbound_days}일 이내 출고 (주말, 공휴일 제외)
+                </OutboundDays>
+              </div>
+              <Counter />
+              <PrintBtn />
+            </Cont>
+          );
+        })}
+    </>
   );
 }
