@@ -20,7 +20,7 @@ export default function UpdataBtn(props) {
         val,
       });
       alert("수정이 완료되었습니다.");
-      window.location.reload();
+      window.location.href = "/";
     } catch (err) {
       alert(err.response.data.err);
     }
