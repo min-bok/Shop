@@ -16,7 +16,7 @@
   
 # 💌 딤플 소개
 쇼핑몰 프로젝트 딤플입니다.<br>
-react + express + mariaDB로 제작하였으며, Heroku로 배포하였습니다.<br>
+react + express + mariaDB로 제작하였으며 배포하였습니다.<br>
 단독으로 진행한 프로젝트 입니다.
 
 <br>
