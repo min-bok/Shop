@@ -13,11 +13,6 @@
 <br>
 <br>
 <br>
-
-# 🔗 배포 링크
-https://dimple-server.herokuapp.com/
-<br>
-<br>
   
 # 💌 딤플 소개
 쇼핑몰 프로젝트 딤플입니다.<br>
