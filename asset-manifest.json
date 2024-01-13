@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/Shop/static/js/main.e995f8d7.js",
+    "main.js": "/Shop/static/js/main.efccc4e9.js",
     "static/js/322.3a9caf1c.chunk.js": "/Shop/static/js/322.3a9caf1c.chunk.js",
     "static/css/379.06034e2c.chunk.css": "/Shop/static/css/379.06034e2c.chunk.css",
     "static/js/379.6d50ffea.chunk.js": "/Shop/static/js/379.6d50ffea.chunk.js",
@@ -19,7 +19,7 @@
     "static/media/adThree.jpg": "/Shop/static/media/adThree.db6f8a35987fd18caf82.jpg",
     "static/media/adOne.jpg": "/Shop/static/media/adOne.b9da2f1a787ac4cabfb2.jpg",
     "index.html": "/Shop/index.html",
-    "main.e995f8d7.js.map": "/Shop/static/js/main.e995f8d7.js.map",
+    "main.efccc4e9.js.map": "/Shop/static/js/main.efccc4e9.js.map",
     "322.3a9caf1c.chunk.js.map": "/Shop/static/js/322.3a9caf1c.chunk.js.map",
     "379.06034e2c.chunk.css.map": "/Shop/static/css/379.06034e2c.chunk.css.map",
     "379.6d50ffea.chunk.js.map": "/Shop/static/js/379.6d50ffea.chunk.js.map",
@@ -36,6 +36,6 @@
     "425.74d5a29a.chunk.js.map": "/Shop/static/js/425.74d5a29a.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.e995f8d7.js"
+    "static/js/main.efccc4e9.js"
   ]
 }
