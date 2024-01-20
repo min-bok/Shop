@@ -15,7 +15,7 @@ export default function App() {
   return (
     <>
       <Reset />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route element={<ContainHeader />}>
